@@ -1,0 +1,266 @@
+[
+ {
+  "service_id": "DS-0026",
+  "name": "Open Data DC",
+  "root": "https://opendata.dc.gov",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0101",
+  "name": "City of Sydney Data Hub",
+  "root": "https://data.cityofsydney.nsw.gov.au",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0110",
+  "name": "인천데이터포털",
+  "root": "https://data.incheon.go.kr",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0119",
+  "name": "国家冰川冻土沙漠科学数据中心",
+  "root": "https://www.ncdc.ac.cn",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0128",
+  "name": "开放广东",
+  "root": "https://gddata.gd.gov.cn",
+  "platform": "DKAN"
+ },
+ {
+  "service_id": "DS-0140",
+  "name": "Portal Nacional de Datos Abiertos Costa Rica",
+  "root": "https://datosabiertos.gob.go.cr",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0176",
+  "name": "GFW Open Data Portal",
+  "root": "https://data.globalforestwatch.org",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0232",
+  "name": "RTD Denver GIS Open Data",
+  "root": "https://gis-rtd-denver.opendata.arcgis.com",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0378",
+  "name": "KNMI Data Platform",
+  "root": "https://dataplatform.knmi.nl",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0479",
+  "name": "CBDB (China Biographical Database)",
+  "root": "https://cbdb.fas.harvard.edu",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0611",
+  "name": "Open Baltimore",
+  "root": "https://data.baltimorecity.gov",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0612",
+  "name": "Portland Open GeoData",
+  "root": "https://gis-pdx.opendata.arcgis.com",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0613",
+  "name": "City of Las Vegas Open Data",
+  "root": "https://opendataportal-lasvegas.opendata.arcgis.com",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0614",
+  "name": "Columbus GIS Open Data Portal",
+  "root": "https://opendata.columbus.gov",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0616",
+  "name": "City of Miami Open Data GIS",
+  "root": "https://datahub-miamigis.opendata.arcgis.com",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0619",
+  "name": "Valencia Open Data Portal",
+  "root": "https://opendata.vlci.valencia.es",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0624",
+  "name": "Michigan GIS Open Data",
+  "root": "https://gis-michigan.opendata.arcgis.com",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0632",
+  "name": "Sevilla IDE Open Data",
+  "root": "https://cda-idesevilla.opendata.arcgis.com",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0633",
+  "name": "Zagreb Open Data Portal",
+  "root": "https://data.zagreb.hr",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0636",
+  "name": "Glasgow Open Data Hub",
+  "root": "https://data.glasgow.gov.uk",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0731",
+  "name": "Open Data Leipzig",
+  "root": "https://opendata.leipzig.de",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0733",
+  "name": "Geodata stad Antwerpen",
+  "root": "https://portaal-stadantwerpen.opendata.arcgis.com",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0741",
+  "name": "Datos Abiertos Málaga",
+  "root": "https://datosabiertos.malaga.eu",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0742",
+  "name": "Open Data Comune di Napoli",
+  "root": "https://dati.comune.napoli.it",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0751",
+  "name": "Data Mill North (Leeds)",
+  "root": "https://datamillnorth.org",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0763",
+  "name": "Buenos Aires Data",
+  "root": "https://data.buenosaires.gob.ar",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0780",
+  "name": "GAEZ v4 Data Portal",
+  "root": "https://gaez.fao.org",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0781",
+  "name": "Sea Around Us",
+  "root": "https://www.seaaroundus.org",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0904",
+  "name": "Stuttgart Open Data Portal",
+  "root": "https://opendata.stuttgart.de",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0911",
+  "name": "Slovenian National Open Data Portal (OPSI)",
+  "root": "https://podatki.gov.si",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0919",
+  "name": "Sheffield Open Data (ArcGIS Hub)",
+  "root": "https://sheffield-city-council-open-data-sheffieldcc.hub.arcgis.com",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0920",
+  "name": "Nottingham Open Data Geoportal",
+  "root": "https://nottingham-city-council-open-data-geoportal-nottmcitycouncil.hub.arcgis.com",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0924",
+  "name": "Hull Open Data",
+  "root": "https://opendata.hullcc.gov.uk",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0927",
+  "name": "Bradford Open Data GIS",
+  "root": "https://spatialdata-cbmdc.hub.arcgis.com",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0932",
+  "name": "Otwarty Gdańsk (Gdańsk Open Data)",
+  "root": "https://ckan.multimediagdansk.pl",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0936",
+  "name": "Reggio Emilia Open Data",
+  "root": "https://opendata.comune.re.it",
+  "platform": "CKAN"
+ },
+ {
+  "service_id": "DS-0960",
+  "name": "Memphis Open Data Hub",
+  "root": "https://memphis-open-data-hub-memegis.hub.arcgis.com",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0961",
+  "name": "MapsLB (Long Beach GeoSpatial & Open Data Hub)",
+  "root": "https://maps.longbeach.gov",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0962",
+  "name": "City of Wichita Open Data Portal",
+  "root": "https://data-cityofwichita.hub.arcgis.com",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0963",
+  "name": "City of Cleveland Open Data",
+  "root": "https://data.clevelandohio.gov",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0966",
+  "name": "Open Data Scottsdale",
+  "root": "https://data.scottsdaleaz.gov",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0968",
+  "name": "Open Gate City (Greensboro Open Data)",
+  "root": "https://data.greensboro-nc.gov",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-0969",
+  "name": "Lexington's Data Hub",
+  "root": "https://data.lexingtonky.gov",
+  "platform": "ArcGIS-Hub"
+ },
+ {
+  "service_id": "DS-1147",
+  "name": "国家微生物科学数据中心(NMDC)",
+  "root": "https://www.nmdc.cn",
+  "platform": "CKAN"
+ }
+]
