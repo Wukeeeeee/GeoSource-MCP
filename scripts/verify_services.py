@@ -222,8 +222,39 @@ def verify_row(row, timeout):
     except Exception as e:
         return {"service_id": service_id, "name": name, "ok": False,
                 "level": "weak", "error": str(e)[:100], "protocol": protocol}
+    reason = ""
+    if not ok:
+        # 记录真实原因，备注里才有排查价值；同时区分"网络到不了"与"服务端拒绝"。
+        # 复现验证器实际请求的 URL，否则可能测到另一个地址而得出错误结论。
+        probe_url = url
+        if verifier is verify_wms:
+            probe_url = _with_query(url, {"service": "WMS", "request": "GetCapabilities"})
+        elif verifier is verify_wfs:
+            probe_url = _with_query(url, {"service": "WFS", "request": "GetCapabilities"})
+        elif verifier is verify_arcgis:
+            probe_url = _with_query(url, {"f": "json"})
+        elif verifier is verify_ogcapi:
+            probe_url = _with_query(url, {"f": "json"})
+        try:
+            r = requests.get(probe_url, headers=HEADERS, timeout=timeout, allow_redirects=True)
+            if r.status_code == 403:
+                reason = "HTTP 403 服务端拒绝脚本 UA，浏览器可能正常"
+            elif r.status_code == 429:
+                reason = "HTTP 429 触发限流，非服务不可用"
+            elif r.status_code >= 500:
+                reason = f"HTTP {r.status_code} 服务端错误，可能是临时故障"
+            elif r.status_code == 404:
+                reason = "HTTP 404 地址已失效"
+            else:
+                reason = f"HTTP {r.status_code}，未返回该协议的特征响应"
+        except requests.exceptions.ConnectionError as e:
+            reason = f"连接失败(疑似链路不可达): {str(e)[:60]}"
+        except requests.exceptions.Timeout:
+            reason = "连接超时(疑似链路不可达)"
+        except Exception as e:
+            reason = str(e)[:60]
     return {"service_id": service_id, "name": name, "ok": ok, "level": level,
-            "url": url, "protocol": protocol, "db_status": status}
+            "url": url, "protocol": protocol, "db_status": status, "reason": reason}
 
 
 def select_rows(conn, limit, only_ids, only_status):
@@ -299,18 +330,38 @@ def main():
     if args.apply:
         cur = conn.cursor()
         today = time.strftime("%Y-%m-%d")
-        n_status = n_lv = 0
+        n_promote = n_record = 0
         for r in results:
             if r["level"] == "skipped":
                 continue
-            new_status = "已验证" if r["ok"] else "未验证"
-            method = f"protocol-probe:{r['level']}"
-            cur.execute(
-                "UPDATE master SET status = ?, verify_method = ?, last_verified = ? WHERE service_id = ?",
-                (new_status, method, today, r["service_id"]))
-            n_status += cur.rowcount
+            sid = r["service_id"]
+            if r["ok"] and r["level"] == "strong":
+                # 协议级实证：可升级为"已验证"
+                cur.execute(
+                    "UPDATE master SET status = '已验证', verify_method = ?, last_verified = ? "
+                    "WHERE service_id = ?",
+                    (f"protocol-probe:{r['level']}", today, sid))
+                n_promote += cur.rowcount
+            else:
+                # 探测失败**不改判为"未验证"**。单次探测失败无法区分三种情况：
+                #   1) 服务真的下线了
+                #   2) 本机到该站的跨境链路被阻断（实测 GitHub/部分欧洲站在本机不可达）
+                #   3) 对脚本 UA 返回 403/429，浏览器打开却正常（实测 flychicago.com）
+                # 把 2、3 类误判成"未验证"会污染目录，故只留证据、不动状态。
+                if r["ok"]:
+                    cur.execute("UPDATE master SET verify_method = ? WHERE service_id = ?",
+                                (f"protocol-probe:{r['level']}", sid))
+                else:
+                    cur.execute(
+                        "UPDATE master SET verify_method = ?, notes = COALESCE(notes,'') || ? "
+                        "WHERE service_id = ?",
+                        (f"protocol-probe:unreachable",
+                         f" | [探测未通过 {today}]: {r.get('error') or '无协议级响应'}（未据此改判状态）", sid))
+                n_record += cur.rowcount
         conn.commit()
-        log(f"已写回 {n_status} 条（status/verify_method/last_verified={today}）")
+        log(f"已写回：升级『已验证』{n_promote} 条，仅记录探测证据/备注 {n_record} 条（{today}）")
+        log("注意：探测失败不会把条目改判为『未验证』——单次失败无法区分服务下线、"
+            "跨境链路阻断与 UA 拦截。")
     else:
         log("dry-run 模式，未修改数据库。加 --apply 执行回写。")
 
