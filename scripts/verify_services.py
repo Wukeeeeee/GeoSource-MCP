@@ -69,21 +69,39 @@ def _get(url, timeout, accept=None):
         return None
 
 
+def _with_query(url, params):
+    """把查询参数合并进 URL。
+
+    很多服务地址本身就带着 ?request=GetCapabilities&service=WMS，
+    直接再追加一遍会产生重复参数，部分服务端会因此返回 InvalidParameterValue。
+    这里先剥掉同名参数再合并。
+    """
+    base, _, query = url.partition("?")
+    existing = []
+    for part in query.split("&"):
+        if not part:
+            continue
+        key = part.split("=", 1)[0]
+        if key.lower() not in {k.lower() for k in params}:
+            existing.append(part)
+    merged = existing + [f"{k}={v}" for k, v in params.items()]
+    return base + ("?" + "&".join(merged) if merged else "")
+
+
 def verify_wms(url, timeout):
-    sep = "&" if "?" in url else "?"
-    test = f"{url}{sep}service=WMS&request=GetCapabilities"
-    r = _get(test, timeout)
+    r = _get(_with_query(url, {"service": "WMS", "request": "GetCapabilities"}), timeout)
     if r is None or r.status_code != 200:
         return False, "weak"
     body = r.text[:3000]
     if "WMS_Capabilities" in body or "WMT_MS_Capabilities" in body:
         return True, "strong"
+    if "ServiceException" in body:
+        return False, "weak"
     return False, "weak"
 
 
 def verify_wfs(url, timeout):
-    sep = "&" if "?" in url else "?"
-    r = _get(f"{url}{sep}service=WFS&request=GetCapabilities", timeout)
+    r = _get(_with_query(url, {"service": "WFS", "request": "GetCapabilities"}), timeout)
     if r is None or r.status_code != 200:
         return False, "weak"
     if "WFS_Capabilities" in r.text[:3000]:
@@ -102,7 +120,7 @@ def verify_wmts(url, timeout):
 
 
 def verify_ogcapi(url, timeout):
-    for test in (url, url + ("&" if "?" in url else "?") + "f=json"):
+    for test in (url, _with_query(url, {"f": "json"})):
         r = _get(test, timeout, accept="application/json")
         if r is None or r.status_code != 200:
             continue
@@ -129,7 +147,7 @@ def verify_stac(url, timeout):
 
 
 def verify_arcgis(url, timeout):
-    test = url + ("&" if "?" in url else "?") + "f=json"
+    test = _with_query(url, {"f": "json"})
     r = _get(test, timeout, accept="application/json")
     if r is None or r.status_code != 200:
         return False, "weak"
