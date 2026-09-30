@@ -18,6 +18,7 @@
   <img src="https://img.shields.io/badge/Catalog-2%2C198%20Services-blue.svg" alt="Services">
   <img src="https://img.shields.io/badge/Verified-1%2C495%20Active-green.svg" alt="Verified">
   <img src="https://img.shields.io/badge/Layers-1%2C561-purple.svg" alt="Layers">
+  <a href="https://mcpservers.org/servers/wukeeeeee/geosource-mcp"><img src="https://mcpservers.org/badge.svg">
 </p>
 
 ---
