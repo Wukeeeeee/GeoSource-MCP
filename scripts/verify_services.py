@@ -17,7 +17,7 @@ Protocol-aware Service Verifier for GeoSource
   其他 HTTP    仅做连通性检查并标注为 weak
 
 用法：
-    python scripts/verify_services.py --dry-run --limit 50
+    python scripts/verify_services.py --limit 50            # 不加 --apply 即为只探测
     python scripts/verify_services.py --apply --workers 20
     python scripts/verify_services.py --apply --id WMS-0001
     python scripts/verify_services.py --apply --only-status 已验证   # 复验已标"已验证"的条目

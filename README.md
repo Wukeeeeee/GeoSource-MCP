@@ -72,7 +72,7 @@ python scripts/probe_portal_api.py --dry-run            # probe only
 python scripts/probe_portal_api.py --apply --workers 20 # probe and write back
 
 # Protocol-aware service verification -> writes status / verify_method / last_verified
-python scripts/verify_services.py --dry-run --limit 50
+python scripts/verify_services.py --limit 50             # no --apply means probe only
 python scripts/verify_services.py --apply --workers 20
 python scripts/verify_services.py --apply --only-status 已验证   # re-audit existing claims
 ```
@@ -183,7 +183,7 @@ python scripts/probe_portal_api.py --dry-run            # 只探测不写库
 python scripts/probe_portal_api.py --apply --workers 20 # 探测并回写
 
 # 2) 协议级可用性验证：写回 status / verify_method / last_verified
-python scripts/verify_services.py --dry-run --limit 50
+python scripts/verify_services.py --limit 50             # 不加 --apply 即为只探测
 python scripts/verify_services.py --apply --workers 20
 python scripts/verify_services.py --apply --only-status 已验证   # 复审已有的"已验证"
 ```
