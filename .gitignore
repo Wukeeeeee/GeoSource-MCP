@@ -13,6 +13,10 @@ venv/
 *.bak
 *.tmp
 
+# 探测脚本的运行产物（明细可另行归档，体积大且每次复测都会变）
+portal_api_results.json
+service_verify_results.json
+
 # OS generated
 .DS_Store
 Thumbs.db

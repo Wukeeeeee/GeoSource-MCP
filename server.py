@@ -339,6 +339,170 @@ def update_service_status(
     }, ensure_ascii=False)
 
 
+# 站点自定义 JSON 包装层（meta/api version 之类）不等于 Socrata catalog
+SOCRATA_MARKERS = ("resultsSetSize", "resourceColumnName", "metadata", "dataset", "Socrata")
+
+PROBE_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) GeoSource-Probe/1.0",
+    "Accept": "application/json",
+}
+
+
+def _http_get(url: str, timeout: float):
+    """返回 (状态码, 响应体前 400 字符)；连接失败时状态码为 None。"""
+    import requests
+
+    try:
+        resp = requests.get(url, headers=PROBE_HEADERS, timeout=timeout, allow_redirects=True)
+        return resp.status_code, resp.text[:400]
+    except Exception as e:
+        return None, str(e)[:120]
+
+
+def _probe_ckan(root: str, timeout: float):
+    url = root + "/api/3/action/status_show"
+    code, body = _http_get(url, timeout)
+    if code == 200 and '"ckan_version"' in body:
+        return "CKAN", url
+    return None, None
+
+
+def _probe_dkan(root: str, timeout: float):
+    for path in ("/api/3/action/package_search?rows=1", "/api/3/action/status_show"):
+        url = root + path
+        code, body = _http_get(url, timeout)
+        if code == 200 and '"result"' in body and ('"success": true' in body or '"results"' in body):
+            return "DKAN", url
+    return None, None
+
+
+def _probe_agol(root: str, timeout: float):
+    for path in ("/api/v3/datasets?page%5Bsize%5D=1", "/sharing/rest/portals/self?f=json"):
+        url = root + path
+        code, body = _http_get(url, timeout)
+        if code == 200 and body.lstrip().startswith("{") and any(
+            k in body for k in ('"data"', '"urlKey"', '"id"')
+        ):
+            return "ArcGIS Hub", url
+    return None, None
+
+
+def _probe_socrata(root: str, timeout: float):
+    url = root + "/api/catalog/v1"
+    code, body = _http_get(url, timeout)
+    if code != 200:
+        return None, None
+    stripped = body.lstrip()
+    # 通用 JSON 404 包装（{".../api/...": 404}）不是 Socrata
+    if stripped.startswith("{") and "/api/" in stripped[:60]:
+        return None, None
+    low = stripped[:200].lower()
+    if '"success": false' in low.replace("'", '"') or '"msg"' in low and "not allowed" in low:
+        return None, None
+    if stripped.startswith("["):
+        return "Socrata", url
+    if stripped.startswith("{") and any(m in body for m in SOCRATA_MARKERS) and "success" not in low[:40]:
+        return "Socrata", url
+    return None, None
+
+
+PORTAL_PROBES = (
+    ("CKAN", _probe_ckan),
+    ("DKAN", _probe_dkan),
+    ("ArcGIS Hub", _probe_agol),
+    ("Socrata", _probe_socrata),
+)
+
+
+def _portal_root(url: Optional[str]) -> Optional[str]:
+    if not url or not url.startswith("http"):
+        return None
+    u = url.strip()
+    for suffix in ("/pages/api", "/portal/", "/home"):
+        if u.endswith(suffix):
+            u = u[: -len(suffix)]
+    return u.rstrip("/") or None
+
+
+@mcp.tool()
+def probe_service_api(
+    service_id: Optional[str] = None,
+    url: Optional[str] = None,
+    timeout: float = 10.0
+) -> str:
+    """
+    Live-probe a cataloged service to confirm its endpoint is reachable right now, and auto-detect the
+    underlying open-data platform (CKAN / DKAN / ArcGIS Hub / Socrata) to return the standard JSON API entry.
+
+    Use this when a service in the catalog is marked 未验证, or before recommending a portal to a user, to
+    avoid handing out a dead link. Either pass a service_id from the catalog or a raw url.
+
+    Args:
+        service_id: Catalog ID to probe (e.g. 'DS-0026'); its service_url and official_url are both tried
+        url: A raw portal root URL to probe directly, if you don't have a catalog ID
+        timeout: Per-request timeout in seconds (default: 10, max: 30)
+    """
+    timeout = min(max(2.0, float(timeout)), 30.0)
+    conn = get_db_connection(read_only=True)
+    cur = conn.cursor()
+
+    record = None
+    if service_id:
+        cur.execute(
+            "SELECT service_id, service_name, service_url, official_url, status FROM master "
+            "WHERE service_id = ? COLLATE NOCASE",
+            (service_id.strip(),),
+        )
+        record = cur.fetchone()
+    conn.close()
+
+    if service_id and not record and not url:
+        return json.dumps({"error": f"Service with ID '{service_id}' not found."}, ensure_ascii=False)
+
+    roots = []
+    if record:
+        for candidate in (record["service_url"], record["official_url"]):
+            r = _portal_root(candidate)
+            if r and r not in roots:
+                roots.append(r)
+    if url:
+        r = _portal_root(url)
+        if r and r not in roots:
+            roots.append(r)
+
+    if not roots:
+        return json.dumps({
+            "reachable": False,
+            "error": "没有可用于探测的 http(s) 地址",
+            "service_id": service_id,
+        }, ensure_ascii=False)
+
+    attempts = []
+    for root in roots:
+        for platform_name, probe_fn in PORTAL_PROBES:
+            hit, api_url = probe_fn(root, timeout)
+            attempts.append({"root": root, "platform": platform_name, "hit": bool(hit)})
+            if hit:
+                return json.dumps({
+                    "reachable": True,
+                    "service_id": record["service_id"] if record else None,
+                    "service_name": record["service_name"] if record else None,
+                    "db_status": record["status"] if record else None,
+                    "detected_platform": platform_name,
+                    "api_url": api_url,
+                    "note": "service_url 与探测结果不一致，可用 update_service_status 回写",
+                }, ensure_ascii=False)
+
+    return json.dumps({
+        "reachable": False,
+        "service_id": record["service_id"] if record else None,
+        "service_name": record["service_name"] if record else None,
+        "db_status": record["status"] if record else None,
+        "tried_roots": roots,
+        "error": "未匹配到 CKAN/DKAN/ArcGIS Hub/Socrata 标准接口（站点可能不可达、需注册或为非标准平台）",
+    }, ensure_ascii=False)
+
+
 def main():
     """Main entrypoint for CLI execution and packaging."""
     if len(sys.argv) > 1 and sys.argv[1] == "--test":
@@ -355,6 +519,10 @@ def main():
         # Test case-insensitive detail fetch
         detail_lower = get_service_detail("ds-0001")
         assert "error" not in json.loads(detail_lower), "Case-insensitive detail fetch failed"
+
+        # Probe tool must degrade gracefully offline (no network required for --test to pass)
+        probe = json.loads(probe_service_api(service_id="NON_EXISTENT_ID_9999"))
+        assert "error" in probe, "probe_service_api should report unknown IDs"
 
         print("[TEST] All tests passed! Ready for MCP clients.")
     else:

@@ -15,6 +15,7 @@ from server import (
     list_categories_and_stats,
     query_gis_sql,
     update_service_status,
+    probe_service_api,
     get_db_connection,
     VALID_STATUSES
 )
@@ -94,6 +95,27 @@ def test_query_gis_sql_readonly_and_safety():
     # Forbidden multiple statements
     multi_res = query_gis_sql("SELECT 1; SELECT 2;")
     assert "error" in json.loads(multi_res)
+
+
+def test_probe_service_api_offline_safety():
+    """Verify probe_service_api returns a structured error for bad input without raising."""
+    missing = json.loads(probe_service_api(service_id="NON_EXISTENT_ID_9999"))
+    assert "error" in missing
+
+    # 明显不是 http 的地址，不应抛异常
+    bad = json.loads(probe_service_api(url="not-a-url", timeout=3))
+    assert "reachable" in bad and bad["reachable"] is False
+
+
+def test_probe_service_api_detects_known_portal():
+    """Live-probe a well-known ArcGIS Hub portal; requires network access."""
+    import pytest
+
+    data = json.loads(probe_service_api(url="https://opendata.dc.gov", timeout=20))
+    if not data.get("reachable"):
+        pytest.skip(f"网络不可达，跳过在线探测: {data.get('error')}")
+    assert data["detected_platform"] == "ArcGIS Hub"
+    assert data["api_url"].startswith("https://opendata.dc.gov/api/v3/")
 
 
 def test_update_service_status_validation():

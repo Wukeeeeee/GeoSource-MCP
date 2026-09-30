@@ -55,11 +55,41 @@ When developers build maps, spatial analysis pipelines, or GIS crawlers using AI
 
 | Tool | Parameters | Purpose |
 | :--- | :--- | :--- |
-| `search_gis_services` | `keyword`, `country`, `protocol`, `category`, `is_free`, `need_no_key`, `limit` | Searches services based on multiple criteria with case-insensitive matching. |
+| `search_gis_services` | `keyword`, `country`, `protocol`, `category`, `is_free`, `need_no_key`, `status`, `limit` | Searches services based on multiple criteria with case-insensitive matching. |
 | `get_service_detail` | `service_id` | Retrieves full metadata (50+ fields) and child layers for a specific service ID (case-insensitive). |
 | `list_categories_and_stats` | *(None)* | Returns summary statistics of categories, protocols, countries, and verification statuses. |
 | `query_gis_sql` | `query` | Executes safe, read-only `SELECT` queries against the SQLite database (capped at 100 rows). |
+| `probe_service_api` | `service_id`, `url`, `timeout` | **Live-probes** an entry and auto-detects its open-data platform (CKAN / DKAN / ArcGIS Hub / Socrata), returning the working JSON API entry. Use before recommending an unverified portal. |
 | `update_service_status` | `service_id`, `new_url`, `status`, `notes` | Updates service availability, URLs, or notes with validated status enums. |
+
+### Verification Scripts
+
+Two scripts back the "verified" claims with real evidence rather than a bare HTTP 200:
+
+```bash
+# Platform detection for open-data portals -> writes the real API URL into service_url
+python scripts/probe_portal_api.py --dry-run            # probe only
+python scripts/probe_portal_api.py --apply --workers 20 # probe and write back
+
+# Protocol-aware service verification -> writes status / verify_method / last_verified
+python scripts/verify_services.py --dry-run --limit 50
+python scripts/verify_services.py --apply --workers 20
+python scripts/verify_services.py --apply --only-status 已验证   # re-audit existing claims
+```
+
+`verify_services.py` checks that a service answers *in its declared protocol* — a WMS endpoint must
+return `WMS_Capabilities`, a STAC endpoint must return `stac_version`, an ArcGIS REST endpoint must
+return a `?f=json` service document, and so on. Results are graded `strong` (protocol-level proof) or
+`weak` (reachable but unproven), and the grade is stored in `verify_method`.
+
+The detection rules for each platform:
+
+| Platform | Probe | Positive signal |
+| :--- | :--- | :--- |
+| CKAN | `GET {root}/api/3/action/status_show` | `"ckan_version"` in JSON |
+| DKAN | `GET {root}/api/3/action/package_search?rows=1` | `"result"` + `"success": true` |
+| ArcGIS Hub | `GET {root}/api/v3/datasets?page[size]=1` | `"data"` array in JSON |
+| Socrata | `GET {root}/api/catalog/v1` | dataset array or `resultsSetSize` |
 
 ### Getting Started
 
@@ -136,11 +166,41 @@ In your IDE's MCP settings, add a new stdio server:
 
 | 工具名称 | 输入参数 | 功能说明 |
 | :--- | :--- | :--- |
-| `search_gis_services` | `keyword`, `country`, `protocol`, `category`, `is_free`, `need_no_key`, `limit` | 多条件筛选查询空间服务（支持大小写无关模糊匹配）。 |
+| `search_gis_services` | `keyword`, `country`, `protocol`, `category`, `is_free`, `need_no_key`, `status`, `limit` | 多条件筛选查询空间服务（支持大小写无关模糊匹配）。 |
 | `get_service_detail` | `service_id` | 获取该服务的 50 余项详细元数据与关联子图层列表。 |
 | `list_categories_and_stats` | 无 | 获取数据库总体量、各大类、协议分布及验证状态统计。 |
 | `query_gis_sql` | `query` | 对 SQLite 数据库执行只读 `SELECT` SQL 查询（内置上限 100 行保护）。 |
+| `probe_service_api` | `service_id`, `url`, `timeout` | **实时探测**条目是否真的可访问，并自动识别底层平台（CKAN / DKAN / ArcGIS Hub / Socrata），返回真正能调用的 JSON 接口地址。推荐未验证的门户前先调用它，避免给出死链。 |
 | `update_service_status` | `service_id`, `new_url`, `status`, `notes` | 经枚举校验后更新服务的可用状态、新 URL 或备注信息。 |
+
+### 数据可信度是怎么做出来的
+
+"已验证"不是随手贴的标签，而是有脚本用真实请求跑出来的。两个脚本：
+
+```bash
+# 1) 门户接口识别：探测底层平台，把真正能调用的 API 地址写回 service_url
+python scripts/probe_portal_api.py --dry-run            # 只探测不写库
+python scripts/probe_portal_api.py --apply --workers 20 # 探测并回写
+
+# 2) 协议级可用性验证：写回 status / verify_method / last_verified
+python scripts/verify_services.py --dry-run --limit 50
+python scripts/verify_services.py --apply --workers 20
+python scripts/verify_services.py --apply --only-status 已验证   # 复审已有的"已验证"
+```
+
+`verify_services.py` 判断的是"服务是否以它声明的协议应答"，而不只是"网址能不能打开"：
+WMS 必须返回 `WMS_Capabilities`，STAC 必须返回 `stac_version`，ArcGIS REST 必须返回 `?f=json`
+的服务文档。结果分两档——`strong`（协议级实证）和 `weak`（能连通但未证实），
+档位写进 `verify_method` 字段，任何人都能查某条记录的"已验证"是怎么来的。
+
+各平台的识别规则：
+
+| 平台 | 探测地址 | 判定依据 |
+| :--- | :--- | :--- |
+| CKAN | `GET {root}/api/3/action/status_show` | JSON 中含 `"ckan_version"` |
+| DKAN | `GET {root}/api/3/action/package_search?rows=1` | 含 `"result"` 且 `"success": true` |
+| ArcGIS Hub | `GET {root}/api/v3/datasets?page[size]=1` | JSON 中含 `"data"` 数组 |
+| Socrata | `GET {root}/api/catalog/v1` | 数据集数组或 `resultsSetSize` 字段 |
 
 ### 快速开始
 

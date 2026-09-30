@@ -1,0 +1,785 @@
+[
+ {
+  "service_id": "DS-0017",
+  "name": "Virginia Open Data Portal",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://data.virginia.gov",
+  "api_url": "https://data.virginia.gov/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0021",
+  "name": "Analyze Boston (Boston Open Data)",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://data.boston.gov",
+  "api_url": "https://data.boston.gov/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0009",
+  "name": "California Open Data (data.ca.gov)",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://data.ca.gov",
+  "api_url": "https://data.ca.gov/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0026",
+  "name": "Open Data DC",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://opendata.dc.gov",
+  "api_url": "https://opendata.dc.gov/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0011",
+  "name": "NY State Open Data (Open NY)",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.ny.gov",
+  "api_url": "https://data.ny.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0010",
+  "name": "Texas Open Data Portal",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.texas.gov",
+  "api_url": "https://data.texas.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0014",
+  "name": "Washington State Open Data",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.wa.gov",
+  "api_url": "https://data.wa.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0023",
+  "name": "LA City Open Data (data.lacity.org)",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.lacity.org",
+  "api_url": "https://data.lacity.org/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0012",
+  "name": "Colorado Open Data Portal",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.colorado.gov",
+  "api_url": "https://data.colorado.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0018",
+  "name": "Pennsylvania Open Data (data.pa.gov)",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.pa.gov",
+  "api_url": "https://data.pa.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0020",
+  "name": "Chicago Data Portal",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.cityofchicago.org",
+  "api_url": "https://data.cityofchicago.org/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0022",
+  "name": "Seattle Open Data",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.seattle.gov",
+  "api_url": "https://data.seattle.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0015",
+  "name": "Oregon Open Data (data.oregon.gov)",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.oregon.gov",
+  "api_url": "https://data.oregon.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0027",
+  "name": "Western Pennsylvania Regional Data Center (WPRDC)",
+  "ok": true,
+  "platform": "DKAN",
+  "root": "https://data.wprdc.org",
+  "api_url": "https://data.wprdc.org/api/3/action/package_search?rows=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0016",
+  "name": "Illinois Open Data Portal",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.illinois.gov",
+  "api_url": "https://data.illinois.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0029",
+  "name": "Detroit Open Data Portal",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://data.detroitmi.gov",
+  "api_url": "https://data.detroitmi.gov/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0025",
+  "name": "Austin Open Data",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.austintexas.gov",
+  "api_url": "https://data.austintexas.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0031",
+  "name": "Nashville Open Data",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://data.nashville.gov",
+  "api_url": "https://data.nashville.gov/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0037",
+  "name": "Milwaukee Open Data",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://data.milwaukee.gov",
+  "api_url": "https://data.milwaukee.gov/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0034",
+  "name": "Open Data Raleigh",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://data.raleighnc.gov",
+  "api_url": "https://data.raleighnc.gov/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0032",
+  "name": "Orlando Open Data",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.cityoforlando.net",
+  "api_url": "https://data.cityoforlando.net/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0036",
+  "name": "OpenIndy (Indianapolis)",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://data.indy.gov",
+  "api_url": "https://data.indy.gov/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0035",
+  "name": "Durham Open Data Portal",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://opendata.durhamnc.gov",
+  "api_url": "https://opendata.durhamnc.gov/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0030",
+  "name": "DataNOLA (New Orleans Open Data)",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.nola.gov",
+  "api_url": "https://data.nola.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0039",
+  "name": "Louisville Metro Open Data",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://data.louisvilleky.gov",
+  "api_url": "https://data.louisvilleky.gov/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0038",
+  "name": "Cincinnati Open Data Portal",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.cincinnati-oh.gov",
+  "api_url": "https://data.cincinnati-oh.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0064",
+  "name": "Open Data Portal München",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://opendata.muenchen.de",
+  "api_url": "https://opendata.muenchen.de/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0079",
+  "name": "Open Data Zürich",
+  "ok": true,
+  "platform": "DKAN",
+  "root": "https://data.stadt-zuerich.ch",
+  "api_url": "https://data.stadt-zuerich.ch/api/3/action/package_search?rows=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0087",
+  "name": "Portale del Dato Comune di Milano",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://dati.comune.milano.it",
+  "api_url": "https://dati.comune.milano.it/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0083",
+  "name": "data.gov.ie",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://data.gov.ie",
+  "api_url": "https://data.gov.ie/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0078",
+  "name": "opendata.swiss",
+  "ok": true,
+  "platform": "DKAN",
+  "root": "https://opendata.swiss",
+  "api_url": "https://opendata.swiss/api/3/action/package_search?rows=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0101",
+  "name": "City of Sydney Data Hub",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://data.cityofsydney.nsw.gov.au",
+  "api_url": "https://data.cityofsydney.nsw.gov.au/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0099",
+  "name": "Data WA",
+  "ok": true,
+  "platform": "DKAN",
+  "root": "https://catalogue.data.wa.gov.au",
+  "api_url": "https://catalogue.data.wa.gov.au/api/3/action/package_search?rows=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0135",
+  "name": "Plataforma Nacional de Datos Abiertos",
+  "ok": true,
+  "platform": "DKAN",
+  "root": "https://datos.gob.mx",
+  "api_url": "https://datos.gob.mx/api/3/action/package_search?rows=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0142",
+  "name": "מאגר הנתונים הממשלתי",
+  "ok": true,
+  "platform": "DKAN",
+  "root": "https://data.gov.il",
+  "api_url": "https://data.gov.il/api/3/action/package_search?rows=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0137",
+  "name": "Datos Abiertos Colombia",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://www.datos.gov.co",
+  "api_url": "https://www.datos.gov.co/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0148",
+  "name": "Data Queensland",
+  "ok": true,
+  "platform": "DKAN",
+  "root": "https://data.qld.gov.au",
+  "api_url": "https://data.qld.gov.au/api/3/action/package_search?rows=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0136",
+  "name": "Datos Abiertos Argentina",
+  "ok": true,
+  "platform": "DKAN",
+  "root": "https://datos.gob.ar",
+  "api_url": "https://datos.gob.ar/api/3/action/package_search?rows=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0176",
+  "name": "GFW Open Data Portal",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://data.globalforestwatch.org",
+  "api_url": "https://data.globalforestwatch.org/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0232",
+  "name": "RTD Denver GIS Open Data",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://gis-rtd-denver.opendata.arcgis.com",
+  "api_url": "https://gis-rtd-denver.opendata.arcgis.com/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0238",
+  "name": "Renfe Data (西班牙国铁)",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://data.renfe.com",
+  "api_url": "https://data.renfe.com/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0363",
+  "name": "World Air Quality Index (WAQI)",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://waqi.info",
+  "api_url": "https://waqi.info/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0619",
+  "name": "Valencia Open Data Portal",
+  "ok": true,
+  "platform": "DKAN",
+  "root": "https://opendata.vlci.valencia.es",
+  "api_url": "https://opendata.vlci.valencia.es/api/3/action/package_search?rows=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0611",
+  "name": "Open Baltimore",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://data.baltimorecity.gov",
+  "api_url": "https://data.baltimorecity.gov/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0612",
+  "name": "Portland Open GeoData",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://gis-pdx.opendata.arcgis.com",
+  "api_url": "https://gis-pdx.opendata.arcgis.com/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0613",
+  "name": "City of Las Vegas Open Data",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://opendataportal-lasvegas.opendata.arcgis.com",
+  "api_url": "https://opendataportal-lasvegas.opendata.arcgis.com/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0614",
+  "name": "Columbus GIS Open Data Portal",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://opendata.columbus.gov",
+  "api_url": "https://opendata.columbus.gov/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0616",
+  "name": "City of Miami Open Data GIS",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://datahub-miamigis.opendata.arcgis.com",
+  "api_url": "https://datahub-miamigis.opendata.arcgis.com/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0625",
+  "name": "AperTO - Torino Open Data",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://aperto.comune.torino.it",
+  "api_url": "https://aperto.comune.torino.it/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0615",
+  "name": "Open Data KC",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.kcmo.org",
+  "api_url": "https://data.kcmo.org/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0624",
+  "name": "Michigan GIS Open Data",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://gis-michigan.opendata.arcgis.com",
+  "api_url": "https://gis-michigan.opendata.arcgis.com/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0633",
+  "name": "Zagreb Open Data Portal",
+  "ok": true,
+  "platform": "DKAN",
+  "root": "https://data.zagreb.hr",
+  "api_url": "https://data.zagreb.hr/api/3/action/package_search?rows=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0632",
+  "name": "Sevilla IDE Open Data",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://cda-idesevilla.opendata.arcgis.com",
+  "api_url": "https://cda-idesevilla.opendata.arcgis.com/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0731",
+  "name": "Open Data Leipzig",
+  "ok": true,
+  "platform": "DKAN",
+  "root": "https://opendata.leipzig.de",
+  "api_url": "https://opendata.leipzig.de/api/3/action/package_search?rows=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0733",
+  "name": "Geodata stad Antwerpen",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://portaal-stadantwerpen.opendata.arcgis.com",
+  "api_url": "https://portaal-stadantwerpen.opendata.arcgis.com/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0740",
+  "name": "Open Data Montpellier Méditerranée",
+  "ok": true,
+  "platform": "DKAN",
+  "root": "https://data.montpellier3m.fr",
+  "api_url": "https://data.montpellier3m.fr/api/3/action/package_search?rows=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0743",
+  "name": "Open Data Comune di Genova",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://dati.comune.genova.it",
+  "api_url": "https://dati.comune.genova.it/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0742",
+  "name": "Open Data Comune di Napoli",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://dati.comune.napoli.it",
+  "api_url": "https://dati.comune.napoli.it/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0751",
+  "name": "Data Mill North (Leeds)",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://datamillnorth.org",
+  "api_url": "https://datamillnorth.org/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0746",
+  "name": "City of Oklahoma City Open Data",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://data.okc.gov",
+  "api_url": "https://data.okc.gov/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0758",
+  "name": "Portal de Dados Abertos São Paulo",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://dados.prefeitura.sp.gov.br",
+  "api_url": "https://dados.prefeitura.sp.gov.br/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0763",
+  "name": "Buenos Aires Data",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://data.buenosaires.gob.ar",
+  "api_url": "https://data.buenosaires.gob.ar/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0747",
+  "name": "City and County of Honolulu Open Data",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.honolulu.gov",
+  "api_url": "https://data.honolulu.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0764",
+  "name": "OpenData Alcaldía de Medellín",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://geomedellin-m-medellin.opendata.arcgis.com",
+  "api_url": "https://geomedellin-m-medellin.opendata.arcgis.com/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0780",
+  "name": "GAEZ v4 Data Portal",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://gaez.fao.org",
+  "api_url": "https://gaez.fao.org/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0845",
+  "name": "CapMetro (Austin)",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.austintexas.gov",
+  "api_url": "https://data.austintexas.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0904",
+  "name": "Stuttgart Open Data Portal",
+  "ok": true,
+  "platform": "DKAN",
+  "root": "https://opendata.stuttgart.de",
+  "api_url": "https://opendata.stuttgart.de/api/3/action/package_search?rows=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0911",
+  "name": "Slovenian National Open Data Portal (OPSI)",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://podatki.gov.si",
+  "api_url": "https://podatki.gov.si/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0919",
+  "name": "Sheffield Open Data (ArcGIS Hub)",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://sheffield-city-council-open-data-sheffieldcc.hub.arcgis.com",
+  "api_url": "https://sheffield-city-council-open-data-sheffieldcc.hub.arcgis.com/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0920",
+  "name": "Nottingham Open Data Geoportal",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://nottingham-city-council-open-data-geoportal-nottmcitycouncil.hub.arcgis.com",
+  "api_url": "https://nottingham-city-council-open-data-geoportal-nottmcitycouncil.hub.arcgis.com/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0932",
+  "name": "Otwarty Gdańsk (Gdańsk Open Data)",
+  "ok": true,
+  "platform": "CKAN",
+  "root": "https://ckan.multimediagdansk.pl",
+  "api_url": "https://ckan.multimediagdansk.pl/api/3/action/status_show",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0927",
+  "name": "Bradford Open Data GIS",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://spatialdata-cbmdc.hub.arcgis.com",
+  "api_url": "https://spatialdata-cbmdc.hub.arcgis.com/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0936",
+  "name": "Reggio Emilia Open Data",
+  "ok": true,
+  "platform": "DKAN",
+  "root": "https://opendata.comune.re.it",
+  "api_url": "https://opendata.comune.re.it/api/3/action/package_search?rows=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0960",
+  "name": "Memphis Open Data Hub",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://memphis-open-data-hub-memegis.hub.arcgis.com",
+  "api_url": "https://memphis-open-data-hub-memegis.hub.arcgis.com/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0962",
+  "name": "City of Wichita Open Data Portal",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://data-cityofwichita.hub.arcgis.com",
+  "api_url": "https://data-cityofwichita.hub.arcgis.com/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0963",
+  "name": "City of Cleveland Open Data",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://data.clevelandohio.gov",
+  "api_url": "https://data.clevelandohio.gov/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0966",
+  "name": "Open Data Scottsdale",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://data.scottsdaleaz.gov",
+  "api_url": "https://data.scottsdaleaz.gov/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0968",
+  "name": "Open Gate City (Greensboro Open Data)",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://data.greensboro-nc.gov",
+  "api_url": "https://data.greensboro-nc.gov/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0964",
+  "name": "Norfolk Open Data",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.norfolk.gov",
+  "api_url": "https://data.norfolk.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0969",
+  "name": "Lexington's Data Hub",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://data.lexingtonky.gov",
+  "api_url": "https://data.lexingtonky.gov/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0965",
+  "name": "Grand Rapids Open Data",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.grandrapidsmi.gov",
+  "api_url": "https://data.grandrapidsmi.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0970",
+  "name": "City of Richmond Open Data Portal",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.richmondgov.com",
+  "api_url": "https://data.richmondgov.com/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0961",
+  "name": "MapsLB (Long Beach GeoSpatial & Open Data Hub)",
+  "ok": true,
+  "platform": "ArcGIS Hub",
+  "root": "https://maps.longbeach.gov",
+  "api_url": "https://maps.longbeach.gov/api/v3/datasets?page%5Bsize%5D=1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0971",
+  "name": "Open Data BR (Baton Rouge)",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.brla.gov",
+  "api_url": "https://data.brla.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0974",
+  "name": "Modesto City View",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.modestogov.com",
+  "api_url": "https://data.modestogov.com/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0973",
+  "name": "City of Mesa Public Data Hub",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.mesaaz.gov",
+  "api_url": "https://data.mesaaz.gov/api/catalog/v1",
+  "changed": true
+ },
+ {
+  "service_id": "DS-0976",
+  "name": "Maryland State Open Data",
+  "ok": true,
+  "platform": "Socrata",
+  "root": "https://data.maryland.gov",
+  "api_url": "https://data.maryland.gov/api/catalog/v1",
+  "changed": true
+ }
+]
