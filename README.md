@@ -15,8 +15,8 @@
   <a href="https://glama.ai/mcp/servers"><img src="https://img.shields.io/badge/Glama-Approved-10b981.svg" alt="Glama Approved"></a>
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10+-brightgreen.svg" alt="Python"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License"></a>
-  <img src="https://img.shields.io/badge/Catalog-2%2C204%20Services-blue.svg" alt="Services">
-  <img src="https://img.shields.io/badge/Verified-1%2C576%20Active-green.svg" alt="Verified">
+  <img src="https://img.shields.io/badge/Catalog-11%2C054%20Services-blue.svg" alt="Services">
+  <img src="https://img.shields.io/badge/Verified-10%2C423%20Active-green.svg" alt="Verified">
   <img src="https://img.shields.io/badge/Layers-1%2C561-purple.svg" alt="Layers">
 </p>
 
@@ -26,7 +26,7 @@
 ## 🌐 English
 
 ### Overview
-**GeoSource MCP** is an open-source [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server providing structured access to an indexed catalog of **2,207 global GIS spatial services** and **1,561 sub-layers**.
+**GeoSource MCP** is an open-source [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server providing structured access to an indexed catalog of **11,054 global GIS spatial services** and **1,561 sub-layers**.
 
 When developers build maps, spatial analysis pipelines, or GIS crawlers using AI assistants (Claude Desktop, Cursor, Windsurf, etc.), large language models frequently struggle to locate real-world endpoints or generate non-functional URLs. GeoSource MCP connects AI environments directly to an indexed local SQLite database (`gis_services.db`), enabling low-latency, multi-criteria discovery of verified spatial services across OGC WMS, WFS, WMTS, XYZ Tiles, ArcGIS REST, STAC, and Open Data APIs.
 
@@ -34,9 +34,9 @@ When developers build maps, spatial analysis pipelines, or GIS crawlers using AI
 - **Structured Discovery**: Helps AI models locate existing, functional endpoints rather than guessing URLs.
 - **Low-Overhead Retrieval**: Fetches only matching records (typically 200 ~ 500 tokens per search) on demand, avoiding the cost and latency of loading megabytes of raw files into prompts.
 - **Transparent Verification**: Tracks explicit availability statuses, each backed by a recorded method in `verify_method`:
-  - **1,576 Verified Active** (71.4%): Confirmed accessible. 345 of them carry protocol-level proof (a WMS that actually returns `WMS_Capabilities`, a STAC API that returns `stac_version`, an ArcGIS REST service document).
-  - **577 Pending / Unverified** (26.1%): Cataloged entries awaiting further verification or restricted by network boundaries.
-  - **54 Deprecated / Inactive** (2.5%): Documented legacy services retained for reference.
+  - **10,423 Verified Active** (94.3%): Confirmed accessible. 4,497 of them carry protocol-level proof (a WMS that actually returns `WMS_Capabilities`, a STAC API that returns `stac_version`, an ArcGIS REST service document).
+  - **577 Pending / Unverified** (5.2%): Cataloged entries awaiting further verification or restricted by network boundaries.
+  - **54 Deprecated / Inactive** (0.5%): Documented legacy services retained for reference.
   - A failed probe never downgrades an entry on its own: a single failure cannot distinguish a dead service from a blocked cross-border route or UA filtering, so the reason is recorded instead.
 - **Two-Way Maintenance**: Supports Excel synchronization and provides tools for AI agents to report status updates and new endpoints.
 
@@ -44,13 +44,17 @@ When developers build maps, spatial analysis pipelines, or GIS crawlers using AI
 
 | Category | Protocols Supported | Notable Data Sources |
 | :--- | :--- | :--- |
-| **Open Data Portals (1,190)** | CKAN, Socrata, DKAN, ArcGIS Hub, REST API | Data.gov, Eurostat, Open Data DC, regional open data hubs |
-| **OGC Standard Services (147)** | WMS 1.1.1/1.3.0, WFS 1.0/2.0, WMTS 1.0.0 | PDOK (Netherlands), geo.admin.ch (Switzerland), MML (Finland) |
-| **Transit & Routing (151)** | GTFS, GTFS-RT, OSRM, REST API | OpenRouteService, Transitland, city transit agencies |
-| **Basemap Tiles (65)** | XYZ Slippy Maps, WMTS, Vector Tiles | OpenStreetMap, Carto, Stadia, OpenTopoMap, MapTiler |
-| **ArcGIS Platforms (100)** | ArcGIS Server REST, FeatureServer, MapServer | Esri Living Atlas, federal & municipal ArcGIS REST endpoints |
-| **Remote Sensing / STAC (67)** | STAC API 1.0, OGC API Records, COG | Earth Search, Microsoft Planetary Computer, USGS Landsat |
-| **3D Geospatial (31)** | 3D Tiles, CityGML, I3S | Cesium ion open assets, municipal 3D building models |
+| **Open Data Portals (10,039)** | CKAN, DKAN, ArcGIS Hub, REST API, HTTP download | Data.gov, Eurostat, Thai DSD, Indonesian Satu Data, county/municipal ArcGIS hubs |
+| **OGC Standard Services (534)** | WMS 1.1.1/1.3.0, WFS 1.0/2.0, WMTS 1.0.0, OGC API Features/Records | PDOK (Netherlands), geo.admin.ch (Switzerland), municipal GeoServers worldwide |
+| **ArcGIS Platforms (243)** | ArcGIS Server REST, FeatureServer, MapServer, ImageServer | Esri Living Atlas, federal & municipal ArcGIS REST endpoints |
+| **Basemap Tiles (106)** | XYZ Slippy Maps, TMS, WMTS, PMTiles, Entwine | OpenStreetMap, Carto, Stadia, OpenTopoMap, MapTiler |
+| **Remote Sensing / STAC (73)** | STAC API 1.0, OGC API Records, COG | Earth Search, Microsoft Planetary Computer, USGS Landsat |
+| **3D Geospatial (20)** | 3D Tiles, CityGML, I3S, Cesium terrain | Cesium ion open assets, municipal 3D building models |
+| **Transit & Routing (14)** | GTFS, GTFS-RT, OSRM, Valhalla | OpenRouteService, Transitland, city transit agencies |
+
+Protocol strings are grouped by family and overlap slightly (e.g. an ArcGIS Hub portal is also an
+open-data portal). A per-category breakdown is available from `list_categories_and_stats`; the
+catalog spans **319 countries/regions** across **102 categories**.
 
 ### Available MCP Tools
 
@@ -117,6 +121,27 @@ python scripts/probe_cn_portals.py            # probe only
 python scripts/probe_cn_portals.py --apply    # write back status/verify_method/notes
 ```
 
+### Bulk Harvesting from a Portal Registry
+
+The 2026-10-02 expansion admitted 8,845 services in one pass by harvesting the
+[dataportals-registry](https://github.com/datenoio/dataportals-registry) (43k catalog records),
+filtering to geospatial platforms, de-duplicating against `service_url` domains already in the
+database, then live-probing every remaining host with the platform-appropriate request
+(`/api/3/action/status_show` for CKAN, `/api/v3/datasets` for ArcGIS Hub, `/geoserver/wms` for
+GeoServer, …). Roughly 35,000 real HTTP requests ran; only hosts returning a protocol-level
+response were admitted as `protocol-probe:strong`, and hosts answering with a real page but no
+discoverable endpoint were admitted as `protocol-probe:weak` with the reason recorded in `notes`.
+
+Two failure modes worth knowing if you rerun this:
+
+- Writing a URL list from Python in text mode leaves `\r` line endings, which makes every `curl`
+  call fail with HTTP 000 in ~0.03 ms — it looks exactly like "every host is dead". Strip them
+  (`tr -d '\r'`) or write with `newline='\n'`.
+- CKAN returns `"success":true` with no space. Matching on `"success": true` silently drops
+  hundreds of live CKAN portals.
+
+The admission scripts are kept per batch under `scripts/add_new_sources_*.py`.
+
 ### Getting Started
 
 #### 1. Requirements & Installation
@@ -163,7 +188,7 @@ In your IDE's MCP settings, add a new stdio server:
 ## 🇨🇳 中文说明
 
 ### 项目简介
-**GeoSource MCP** 是一个基于 [Model Context Protocol (MCP)](https://modelcontextprotocol.io) 标准的开源数据服务程序。它为各类 AI 编程与分析助手（Claude Desktop、Cursor、Windsurf 等）提供对本地结构化索引的 **2,207 个全球真实 GIS 空间服务** 与 **1,561 个地图图层** 的检索工具。
+**GeoSource MCP** 是一个基于 [Model Context Protocol (MCP)](https://modelcontextprotocol.io) 标准的开源数据服务程序。它为各类 AI 编程与分析助手（Claude Desktop、Cursor、Windsurf 等）提供对本地结构化索引的 **11,054 个全球真实 GIS 空间服务** 与 **1,561 个地图图层** 的检索工具。
 
 在开发地图应用或编写空间数据处理脚本时，大模型通常无法准确掌握全球各机构公开的实时服务接口，容易推断出不可用的链接。GeoSource MCP 直接连接本地 SQLite 数据库（`gis_services.db`），帮助 AI 快速检索真实的可用服务与图层参数。
 
@@ -171,9 +196,9 @@ In your IDE's MCP settings, add a new stdio server:
 - **结构化发现，降低幻觉**：提供经过结构化收录的真实服务端点，辅助 AI 编写准确的地图调用代码。
 - **按需低开销检索**：每次仅检索返回匹配的 3~5 条记录（约 200~500 Tokens），避免将数兆字节的原始表格强行填入上下文窗口。
 - **透明的可用性状态**（每条的验证方式都记录在 `verify_method` 字段，可逐条追溯）：
-  - **已验证**（1,576 条，占比 71.4%）：经探测确认为可用。其中 345 条带**协议级实证**——WMS 真的返回了 `WMS_Capabilities`、STAC 真的返回了 `stac_version`、ArcGIS REST 真的返回了服务文档。
-  - **未验证**（577 条，占比 26.1%）：已整理归类，待进一步探测或受跨国网络连通性限制。
-  - **已停止**（54 条，占比 2.5%）：已下线或历史归档服务，保留供查阅追溯。
+  - **已验证**（10,423 条，占比 94.3%）：经探测确认为可用。其中 4,497 条带**协议级实证**——WMS 真的返回了 `WMS_Capabilities`、STAC 真的返回了 `stac_version`、ArcGIS REST 真的返回了服务文档。
+  - **未验证**（577 条，占比 5.2%）：已整理归类，待进一步探测或受跨国网络连通性限制。
+  - **已停止**（54 条，占比 0.5%）：已下线或历史归档服务，保留供查阅追溯。
   - **探测失败不会直接改判为"未验证"**：单次失败无法区分"服务真下线"、"本地到该站的跨境链路被阻断"、"对脚本 UA 返回 403 但浏览器正常"这三种情况，因此只记录失败原因，保留原状态。
 - **双向维护支持**：支持与 Excel 表格双向数据同步，并提供更新接口供 AI 助手汇报失效链接与新地址。
 
@@ -181,13 +206,16 @@ In your IDE's MCP settings, add a new stdio server:
 
 | 分类 | 协议类型 | 典型代表 |
 | :--- | :--- | :--- |
-| **开放数据门户 (1,190 条)** | CKAN, Socrata, DKAN, ArcGIS Hub, REST API | Data.gov、欧盟数据门户、开放广东、各级城市开放数据中心 |
-| **OGC 标准服务 (147 条)** | OGC WMS (1.1.1/1.3.0), WFS, WMTS | 荷兰 PDOK、瑞士联邦地图、芬兰测绘局等国家级测绘局 |
-| **交通与路网 (151 条)** | GTFS, GTFS-RT, OSRM, REST API | OpenRouteService、Transitland、各地铁公交调度 API |
-| **底图瓦片 (65 条)** | XYZ 栅格瓦片, WMTS, 矢量瓦片 | OpenStreetMap, Carto, Stadia Maps, OpenTopoMap |
-| **ArcGIS 平台 (100 条)** | ArcGIS REST (MapServer, FeatureServer) | Esri Living Atlas、各国政府与水务气象机构 REST 服务 |
-| **遥感时空资产 (67 条)** | STAC API 1.0, OGC API Records, COG | Earth Search、行星计算机、USGS Landsat 卫星时空目录 |
-| **三维空间数据 (31 条)** | 3D Tiles, CityGML, I3S | Cesium ion 开放资产、城市级白模与倾斜摄影服务 |
+| **开放数据门户 (10,039 条)** | CKAN, DKAN, ArcGIS Hub, REST API, HTTP 下载 | Data.gov、欧盟数据门户、开放广东、泰国 DSD、印尼 Satu Data、各县市开放数据门户 |
+| **OGC 标准服务 (534 条)** | OGC WMS (1.1.1/1.3.0), WFS, WMTS, OGC API Features/Records | 荷兰 PDOK、瑞士联邦地图、芬兰测绘局，以及各国市政 GeoServer |
+| **ArcGIS 平台 (243 条)** | ArcGIS REST (MapServer, FeatureServer, ImageServer) | Esri Living Atlas、各国政府与水务气象机构 REST 服务 |
+| **底图瓦片 (106 条)** | XYZ 栅格瓦片, TMS, WMTS, PMTiles, Entwine | OpenStreetMap, Carto, Stadia Maps, OpenTopoMap |
+| **遥感时空资产 (73 条)** | STAC API 1.0, OGC API Records, COG | Earth Search、行星计算机、USGS Landsat |
+| **三维空间数据 (20 条)** | 3D Tiles, CityGML, I3S, Cesium terrain | Cesium ion 开放资产、城市级白模与倾斜摄影服务 |
+| **交通与路网 (14 条)** | GTFS, GTFS-RT, OSRM, Valhalla | OpenRouteService、Transitland、各地铁公交调度 API |
+
+协议按族群归类、彼此有少量重叠（例如 ArcGIS Hub 门户同时也算开放数据门户）。按细分类目的实时
+分布可通过 `list_categories_and_stats` 获取；当前目录覆盖 **319 个国家/地区**、**102 个分类**。
 
 ### MCP 工具一览
 
@@ -228,6 +256,23 @@ WMS 必须返回 `WMS_Capabilities`，STAC 必须返回 `stac_version`，ArcGIS 
 | DKAN | `GET {root}/api/3/action/package_search?rows=1` | 含 `"result"` 且 `"success": true` |
 | ArcGIS Hub | `GET {root}/api/v3/datasets?page[size]=1` | JSON 中含 `"data"` 数组 |
 | Socrata | `GET {root}/api/catalog/v1` | 数据集数组或 `resultsSetSize` 字段 |
+
+### 从门户登记册批量扩库（2026-10-02）
+
+本轮一次性入库 8,845 条，靠的是 [dataportals-registry](https://github.com/datenoio/dataportals-registry)
+（4.3 万条门户记录）：筛出地理空间类平台 → 与库内已有域名去重 → 对每个候选主机发**符合其平台的真实请求**
+（CKAN 打 `/api/3/action/status_show`，ArcGIS Hub 打 `/api/v3/datasets`，GeoServer 打 `/geoserver/wms` 等）。
+累计发出约 3.5 万次真实请求，只有返回协议级应答的才按 `protocol-probe:strong` 收录；
+只返回真实页面、探不到接口的按 `protocol-probe:weak` 收录并在 `notes` 写明原因。
+
+重跑这套流程时有两个坑：
+
+- 用 Python 文本模式写 URL 清单会带上 `\r` 行尾，`curl` 全部报 HTTP 000、耗时 0.03ms，
+  看起来像"全站都死了"。要么 `tr -d '\r'` 清洗，要么写文件时加 `newline='\n'`。
+- CKAN 返回的是 `"success":true`（无空格）。按 `"success": true`（带空格）匹配会静默漏掉
+  几百个活着的 CKAN 门户。
+
+各批次入库脚本留档在 `scripts/add_new_sources_*.py`。
 
 ### 快速开始
 
