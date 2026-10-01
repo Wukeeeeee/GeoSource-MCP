@@ -3,7 +3,7 @@
 GeoSource MCP Server
 --------------------
 A Model Context Protocol (MCP) server providing structured access to a curated
-database of 2,198 global GIS spatial services, layers, and open geospatial endpoints.
+database of 2,204 global GIS spatial services, layers, and open geospatial endpoints.
 """
 
 import os
@@ -26,7 +26,7 @@ if sys.platform == "win32":
 mcp = FastMCP(
     "geosource-mcp",
     instructions=(
-        "GeoSource provides structured access to 2,198 global GIS services "
+        "GeoSource provides structured access to 2,204 global GIS services "
         "(WMS, WFS, WMTS, XYZ Tiles, ArcGIS REST, STAC APIs) and 1,561 spatial layers. "
         "Use these tools to discover, search, filter, and inspect verified geospatial endpoints."
     )

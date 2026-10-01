@@ -15,8 +15,8 @@
   <a href="https://glama.ai/mcp/servers"><img src="https://img.shields.io/badge/Glama-Approved-10b981.svg" alt="Glama Approved"></a>
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10+-brightgreen.svg" alt="Python"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License"></a>
-  <img src="https://img.shields.io/badge/Catalog-2%2C198%20Services-blue.svg" alt="Services">
-  <img src="https://img.shields.io/badge/Verified-1%2C568%20Active-green.svg" alt="Verified">
+  <img src="https://img.shields.io/badge/Catalog-2%2C204%20Services-blue.svg" alt="Services">
+  <img src="https://img.shields.io/badge/Verified-1%2C573%20Active-green.svg" alt="Verified">
   <img src="https://img.shields.io/badge/Layers-1%2C561-purple.svg" alt="Layers">
 </p>
 
@@ -26,7 +26,7 @@
 ## 🌐 English
 
 ### Overview
-**GeoSource MCP** is an open-source [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server providing structured access to an indexed catalog of **2,198 global GIS spatial services** and **1,561 sub-layers**.
+**GeoSource MCP** is an open-source [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server providing structured access to an indexed catalog of **2,204 global GIS spatial services** and **1,561 sub-layers**.
 
 When developers build maps, spatial analysis pipelines, or GIS crawlers using AI assistants (Claude Desktop, Cursor, Windsurf, etc.), large language models frequently struggle to locate real-world endpoints or generate non-functional URLs. GeoSource MCP connects AI environments directly to an indexed local SQLite database (`gis_services.db`), enabling low-latency, multi-criteria discovery of verified spatial services across OGC WMS, WFS, WMTS, XYZ Tiles, ArcGIS REST, STAC, and Open Data APIs.
 
@@ -34,8 +34,8 @@ When developers build maps, spatial analysis pipelines, or GIS crawlers using AI
 - **Structured Discovery**: Helps AI models locate existing, functional endpoints rather than guessing URLs.
 - **Low-Overhead Retrieval**: Fetches only matching records (typically 200 ~ 500 tokens per search) on demand, avoiding the cost and latency of loading megabytes of raw files into prompts.
 - **Transparent Verification**: Tracks explicit availability statuses, each backed by a recorded method in `verify_method`:
-  - **1,568 Verified Active** (71.3%): Confirmed accessible. 345 of them carry protocol-level proof (a WMS that actually returns `WMS_Capabilities`, a STAC API that returns `stac_version`, an ArcGIS REST service document).
-  - **576 Pending / Unverified** (26.2%): Cataloged entries awaiting further verification or restricted by network boundaries.
+  - **1,573 Verified Active** (71.4%): Confirmed accessible. 345 of them carry protocol-level proof (a WMS that actually returns `WMS_Capabilities`, a STAC API that returns `stac_version`, an ArcGIS REST service document).
+  - **577 Pending / Unverified** (26.2%): Cataloged entries awaiting further verification or restricted by network boundaries.
   - **54 Deprecated / Inactive** (2.5%): Documented legacy services retained for reference.
   - A failed probe never downgrades an entry on its own: a single failure cannot distinguish a dead service from a blocked cross-border route or UA filtering, so the reason is recorded instead.
 - **Two-Way Maintenance**: Supports Excel synchronization and provides tools for AI agents to report status updates and new endpoints.
@@ -163,7 +163,7 @@ In your IDE's MCP settings, add a new stdio server:
 ## 🇨🇳 中文说明
 
 ### 项目简介
-**GeoSource MCP** 是一个基于 [Model Context Protocol (MCP)](https://modelcontextprotocol.io) 标准的开源数据服务程序。它为各类 AI 编程与分析助手（Claude Desktop、Cursor、Windsurf 等）提供对本地结构化索引的 **2,198 个全球真实 GIS 空间服务** 与 **1,561 个地图图层** 的检索工具。
+**GeoSource MCP** 是一个基于 [Model Context Protocol (MCP)](https://modelcontextprotocol.io) 标准的开源数据服务程序。它为各类 AI 编程与分析助手（Claude Desktop、Cursor、Windsurf 等）提供对本地结构化索引的 **2,204 个全球真实 GIS 空间服务** 与 **1,561 个地图图层** 的检索工具。
 
 在开发地图应用或编写空间数据处理脚本时，大模型通常无法准确掌握全球各机构公开的实时服务接口，容易推断出不可用的链接。GeoSource MCP 直接连接本地 SQLite 数据库（`gis_services.db`），帮助 AI 快速检索真实的可用服务与图层参数。
 
@@ -171,8 +171,8 @@ In your IDE's MCP settings, add a new stdio server:
 - **结构化发现，降低幻觉**：提供经过结构化收录的真实服务端点，辅助 AI 编写准确的地图调用代码。
 - **按需低开销检索**：每次仅检索返回匹配的 3~5 条记录（约 200~500 Tokens），避免将数兆字节的原始表格强行填入上下文窗口。
 - **透明的可用性状态**（每条的验证方式都记录在 `verify_method` 字段，可逐条追溯）：
-  - **已验证**（1,568 条，占比 71.3%）：经探测确认为可用。其中 345 条带**协议级实证**——WMS 真的返回了 `WMS_Capabilities`、STAC 真的返回了 `stac_version`、ArcGIS REST 真的返回了服务文档。
-  - **未验证**（576 条，占比 26.2%）：已整理归类，待进一步探测或受跨国网络连通性限制。
+  - **已验证**（1,573 条，占比 71.4%）：经探测确认为可用。其中 345 条带**协议级实证**——WMS 真的返回了 `WMS_Capabilities`、STAC 真的返回了 `stac_version`、ArcGIS REST 真的返回了服务文档。
+  - **未验证**（577 条，占比 26.2%）：已整理归类，待进一步探测或受跨国网络连通性限制。
   - **已停止**（54 条，占比 2.5%）：已下线或历史归档服务，保留供查阅追溯。
   - **探测失败不会直接改判为"未验证"**：单次失败无法区分"服务真下线"、"本地到该站的跨境链路被阻断"、"对脚本 UA 返回 403 但浏览器正常"这三种情况，因此只记录失败原因，保留原状态。
 - **双向维护支持**：支持与 Excel 表格双向数据同步，并提供更新接口供 AI 助手汇报失效链接与新地址。
