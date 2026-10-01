@@ -16,7 +16,7 @@
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10+-brightgreen.svg" alt="Python"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License"></a>
   <img src="https://img.shields.io/badge/Catalog-2%2C198%20Services-blue.svg" alt="Services">
-  <img src="https://img.shields.io/badge/Verified-1%2C538%20Active-green.svg" alt="Verified">
+  <img src="https://img.shields.io/badge/Verified-1%2C568%20Active-green.svg" alt="Verified">
   <img src="https://img.shields.io/badge/Layers-1%2C561-purple.svg" alt="Layers">
 </p>
 
@@ -34,8 +34,8 @@ When developers build maps, spatial analysis pipelines, or GIS crawlers using AI
 - **Structured Discovery**: Helps AI models locate existing, functional endpoints rather than guessing URLs.
 - **Low-Overhead Retrieval**: Fetches only matching records (typically 200 ~ 500 tokens per search) on demand, avoiding the cost and latency of loading megabytes of raw files into prompts.
 - **Transparent Verification**: Tracks explicit availability statuses, each backed by a recorded method in `verify_method`:
-  - **1,538 Verified Active** (70.0%): Confirmed accessible. 345 of them carry protocol-level proof (a WMS that actually returns `WMS_Capabilities`, a STAC API that returns `stac_version`, an ArcGIS REST service document).
-  - **606 Pending / Unverified** (27.6%): Cataloged entries awaiting further verification or restricted by network boundaries.
+  - **1,568 Verified Active** (71.3%): Confirmed accessible. 345 of them carry protocol-level proof (a WMS that actually returns `WMS_Capabilities`, a STAC API that returns `stac_version`, an ArcGIS REST service document).
+  - **576 Pending / Unverified** (26.2%): Cataloged entries awaiting further verification or restricted by network boundaries.
   - **54 Deprecated / Inactive** (2.5%): Documented legacy services retained for reference.
   - A failed probe never downgrades an entry on its own: a single failure cannot distinguish a dead service from a blocked cross-border route or UA filtering, so the reason is recorded instead.
 - **Two-Way Maintenance**: Supports Excel synchronization and provides tools for AI agents to report status updates and new endpoints.
@@ -92,6 +92,31 @@ The detection rules for each platform:
 | ArcGIS Hub | `GET {root}/api/v3/datasets?page[size]=1` | `"data"` array in JSON |
 | Socrata | `GET {root}/api/catalog/v1` | dataset array or `resultsSetSize` |
 
+### Chinese Government Portals Are a Different Animal
+
+Domestic 省市"公共数据开放平台" do not run CKAN-style catalogs. `scripts/probe_cn_portals.py`
+handles them separately (matches entries whose URL is under `gov.cn`):
+
+- **DExchangeOpen** (Yinchuan, Xuzhou, …): Vue SPA; the real gateway is
+  `{root}/dexchangeOpen/appauth/getappid` — live, but every data call requires SSO login
+  and an `appId` token, so anonymous API access returns `{"code":401,"msg":"sso not login."}`.
+- **Jspm platform** (Dongying, Binzhou, Weihai, Shandong, …): server-rendered pages with the
+  data catalog HTML delivered directly (`/{city}/catalog/`). There is no public JSON search API
+  to register; the site itself is the interface.
+- Entries whose domain no longer resolves anywhere (checked against both the local resolver and
+  AliDNS DoH `223.5.5.5`) are recorded as `cn-probe:dns-dead` in `verify_method` with the evidence
+  in `notes` — status is left untouched, because several cities folded their portals into
+  provincial platforms (e.g. Guangdong's `gddata.gd.gov.cn`, Jiangsu's `data.jiangsu.gov.cn`)
+  and the entry should follow the new address rather than be declared dead.
+
+Statuses after the 2026-09-30 pass over 118 domestic entries: 96 alive (13 with a concrete API or
+catalog URL written into `service_url`), 12 domains confirmed gone.
+
+```bash
+python scripts/probe_cn_portals.py            # probe only
+python scripts/probe_cn_portals.py --apply    # write back status/verify_method/notes
+```
+
 ### Getting Started
 
 #### 1. Requirements & Installation
@@ -146,8 +171,8 @@ In your IDE's MCP settings, add a new stdio server:
 - **结构化发现，降低幻觉**：提供经过结构化收录的真实服务端点，辅助 AI 编写准确的地图调用代码。
 - **按需低开销检索**：每次仅检索返回匹配的 3~5 条记录（约 200~500 Tokens），避免将数兆字节的原始表格强行填入上下文窗口。
 - **透明的可用性状态**（每条的验证方式都记录在 `verify_method` 字段，可逐条追溯）：
-  - **已验证**（1,538 条，占比 70.0%）：经探测确认为可用。其中 345 条带**协议级实证**——WMS 真的返回了 `WMS_Capabilities`、STAC 真的返回了 `stac_version`、ArcGIS REST 真的返回了服务文档。
-  - **未验证**（606 条，占比 27.6%）：已整理归类，待进一步探测或受跨国网络连通性限制。
+  - **已验证**（1,568 条，占比 71.3%）：经探测确认为可用。其中 345 条带**协议级实证**——WMS 真的返回了 `WMS_Capabilities`、STAC 真的返回了 `stac_version`、ArcGIS REST 真的返回了服务文档。
+  - **未验证**（576 条，占比 26.2%）：已整理归类，待进一步探测或受跨国网络连通性限制。
   - **已停止**（54 条，占比 2.5%）：已下线或历史归档服务，保留供查阅追溯。
   - **探测失败不会直接改判为"未验证"**：单次失败无法区分"服务真下线"、"本地到该站的跨境链路被阻断"、"对脚本 UA 返回 403 但浏览器正常"这三种情况，因此只记录失败原因，保留原状态。
 - **双向维护支持**：支持与 Excel 表格双向数据同步，并提供更新接口供 AI 助手汇报失效链接与新地址。

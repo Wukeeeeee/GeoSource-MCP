@@ -1,0 +1,1182 @@
+[
+ {
+  "service_id": "STAC-0021",
+  "name": "NASA CMR-STAC NRSCC (China National Remote Sensing)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "TILE-0049",
+  "name": "天地图 Tianditu (国家地理信息公共服务平台)",
+  "db_status": "已验证",
+  "ok": false,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页 404，记录的地址可能已变更"
+ },
+ {
+  "service_id": "DS-0116",
+  "name": "国家数据",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0120",
+  "name": "北京市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页无法访问（连接被重置或 5xx），本机链路问题与站点状态待区分"
+ },
+ {
+  "service_id": "DS-0121",
+  "name": "上海市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0122",
+  "name": "浙江·数据开放",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0123",
+  "name": "杭州市数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0124",
+  "name": "武汉市公共数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0125",
+  "name": "南京市政府数据服务网",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": false,
+  "platform": null,
+  "api_url": null,
+  "note": "域名无法解析（含阿里公共DNS复核），站点已下线或迁入省级平台"
+ },
+ {
+  "service_id": "DS-0126",
+  "name": "深圳市政府数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0127",
+  "name": "重庆市公共数据开放系统",
+  "db_status": "已验证",
+  "ok": false,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页无法访问（连接被重置或 5xx），本机链路问题与站点状态待区分"
+ },
+ {
+  "service_id": "DS-0128",
+  "name": "开放广东",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0172",
+  "name": "中华人民共和国民政部行政区划",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0283",
+  "name": "CAAC Statistics",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0315",
+  "name": "MOT China Transport Statistics",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0316",
+  "name": "National Bureau of Statistics China",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0347",
+  "name": "国家航天局 (CNSA)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0395",
+  "name": "中国气象局 (CMA)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0468",
+  "name": "天津市公共数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0469",
+  "name": "苏州市公共数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0470",
+  "name": "湖南政务大数据公众门户",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0603",
+  "name": "广州市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": false,
+  "platform": null,
+  "api_url": null,
+  "note": "域名无法解析（含阿里公共DNS复核），站点已下线或迁入省级平台"
+ },
+ {
+  "service_id": "DS-0604",
+  "name": "成都市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": false,
+  "platform": null,
+  "api_url": null,
+  "note": "域名无法解析（含阿里公共DNS复核），站点已下线或迁入省级平台"
+ },
+ {
+  "service_id": "DS-0605",
+  "name": "西安市公共数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0606",
+  "name": "天津市信息资源统一开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0607",
+  "name": "青岛市公共数据开放网",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": "Jspm",
+  "api_url": "http://data.qingdao.gov.cn/qingdao/catalog/",
+  "note": "Jspm 平台(服务端渲染，无公开 JSON 接口)，数据目录页 /qingdao/catalog/ 可直接浏览下载"
+ },
+ {
+  "service_id": "DS-0608",
+  "name": "宁波市数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0609",
+  "name": "长沙市政务数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0610",
+  "name": "合肥市政府数据开放平台",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页无法访问（连接被重置或 5xx），本机链路问题与站点状态待区分"
+ },
+ {
+  "service_id": "DS-0752",
+  "name": "福州市政务数据开放平台",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": false,
+  "platform": null,
+  "api_url": null,
+  "note": "域名无法解析（含阿里公共DNS复核），站点已下线或迁入省级平台"
+ },
+ {
+  "service_id": "DS-0753",
+  "name": "济南市公共数据开放网",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": "Jspm",
+  "api_url": "http://data.jinan.gov.cn/jinan/catalog/",
+  "note": "Jspm 平台(服务端渲染，无公开 JSON 接口)，数据目录页 /jinan/catalog/ 可直接浏览下载"
+ },
+ {
+  "service_id": "DS-0754",
+  "name": "无锡市数据开放平台",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页无法访问（连接被重置或 5xx），本机链路问题与站点状态待区分"
+ },
+ {
+  "service_id": "DS-0755",
+  "name": "珠海市民生数据开放平台",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": false,
+  "platform": null,
+  "api_url": null,
+  "note": "域名无法解析（含阿里公共DNS复核），站点已下线或迁入省级平台"
+ },
+ {
+  "service_id": "DS-0774",
+  "name": "国家能源局 (NEA)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0791",
+  "name": "国家知识产权局 (CNIPA)",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0941",
+  "name": "贵阳市政府数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0942",
+  "name": "云南省一体化公共数据平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0943",
+  "name": "福建省公共数据资源统一开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0944",
+  "name": "海南省政府数据统一开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0945",
+  "name": "广西壮族自治区公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0946",
+  "name": "山西省公共数据开放网站",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0947",
+  "name": "内蒙古自治区公共数据开放网",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": "Jspm",
+  "api_url": "https://data.nmg.gov.cn/oportal/catalog/",
+  "note": "Jspm 平台(服务端渲染，无公开 JSON 接口)，数据目录页 /oportal/catalog/ 可直接浏览下载"
+ },
+ {
+  "service_id": "DS-0949",
+  "name": "辽宁省公共数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": "Jspm",
+  "api_url": "https://data.ln.gov.cn/oportal/catalog/",
+  "note": "Jspm 平台(服务端渲染，无公开 JSON 接口)，数据目录页 /oportal/catalog/ 可直接浏览下载"
+ },
+ {
+  "service_id": "DS-0950",
+  "name": "湖北公共数据开放网",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0951",
+  "name": "温州市数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0952",
+  "name": "烟台市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页无法访问（连接被重置或 5xx），本机链路问题与站点状态待区分"
+ },
+ {
+  "service_id": "DS-0953",
+  "name": "开放扬州",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0954",
+  "name": "惠州市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": false,
+  "platform": null,
+  "api_url": null,
+  "note": "域名无法解析（含阿里公共DNS复核），站点已下线或迁入省级平台"
+ },
+ {
+  "service_id": "DS-0955",
+  "name": "嘉兴市公共数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0956",
+  "name": "潍坊市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": "Jspm",
+  "api_url": "http://data.weifang.gov.cn/weifang/catalog/",
+  "note": "Jspm 平台(服务端渲染，无公开 JSON 接口)，数据目录页 /weifang/catalog/ 可直接浏览下载"
+ },
+ {
+  "service_id": "DS-0957",
+  "name": "南通市公共数据开放网站",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-0958",
+  "name": "江门市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": false,
+  "platform": null,
+  "api_url": null,
+  "note": "域名无法解析（含阿里公共DNS复核），站点已下线或迁入省级平台"
+ },
+ {
+  "service_id": "DS-0959",
+  "name": "镇江市公共数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1086",
+  "name": "国家统计局微观数据实验室申请平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1087",
+  "name": "自然资源部门户网站(统计公报/数据服务)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1089",
+  "name": "标准地图服务系统",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1090",
+  "name": "地质云3.0(中国地质调查局)",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页无法访问（连接被重置或 5xx），本机链路问题与站点状态待区分"
+ },
+ {
+  "service_id": "DS-1091",
+  "name": "住房和城乡建设部门户(统计/标准)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1092",
+  "name": "水利部雨水情发布(实时水情)",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1093",
+  "name": "农业农村部门户网站",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1094",
+  "name": "生态环境部门户(环境质量发布)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1098",
+  "name": "中国地震局门户网站",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1099",
+  "name": "国家铁路局(行业统计)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1100",
+  "name": "海关总署(数说海关/统计)",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1101",
+  "name": "中国人民银行门户(金融统计)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1102",
+  "name": "国家企业信用信息公示系统",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页无法访问（连接被重置或 5xx），本机链路问题与站点状态待区分"
+ },
+ {
+  "service_id": "DS-1103",
+  "name": "工业和信息化部(行业运行统计)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1104",
+  "name": "国家卫生健康委员会(数据发布)",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1105",
+  "name": "国家林业和草原局门户",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1106",
+  "name": "国家发展改革委(发改数据/价格)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1107",
+  "name": "国家药品监督管理局门户",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1108",
+  "name": "NMPA药品/医疗器械/化妆品数据查询",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1109",
+  "name": "应急管理部门户(安全生产/灾害)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1111",
+  "name": "国家标准全文公开系统",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1112",
+  "name": "商务部(外资/外贸统计)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1113",
+  "name": "国家外汇管理局(统计数据)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1115",
+  "name": "中国证监会(证券期货统计)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1116",
+  "name": "国家市场监督管理总局(登记/认证数据)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1117",
+  "name": "教育部门户(教育公开)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1118",
+  "name": "人力资源和社会保障部门户",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1119",
+  "name": "财政部门户(预决算)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1121",
+  "name": "山东省公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": "Jspm",
+  "api_url": "http://data.shandong.gov.cn/portal/catalog/",
+  "note": "Jspm 平台(服务端渲染，无公开 JSON 接口)，数据目录页 /portal/catalog/ 可直接浏览下载"
+ },
+ {
+  "service_id": "DS-1122",
+  "name": "吉林·数据开放",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1123",
+  "name": "安徽省公共数据开放平台",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": false,
+  "platform": null,
+  "api_url": null,
+  "note": "域名无法解析（含阿里公共DNS复核），站点已下线或迁入省级平台"
+ },
+ {
+  "service_id": "DS-1124",
+  "name": "黑龙江省政务数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1125",
+  "name": "江苏省省级公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1126",
+  "name": "河南省公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1127",
+  "name": "陕西省公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1128",
+  "name": "四川省公共数据开放网",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页无法访问（连接被重置或 5xx），本机链路问题与站点状态待区分"
+ },
+ {
+  "service_id": "DS-1130",
+  "name": "甘肃省公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1131",
+  "name": "青海省公共数据开放平台",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页无法访问（连接被重置或 5xx），本机链路问题与站点状态待区分"
+ },
+ {
+  "service_id": "DS-1133",
+  "name": "新疆公共数据开放平台",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": false,
+  "platform": null,
+  "api_url": null,
+  "note": "域名无法解析（含阿里公共DNS复核），站点已下线或迁入省级平台"
+ },
+ {
+  "service_id": "DS-1134",
+  "name": "西藏公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1135",
+  "name": "大连市公共数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1136",
+  "name": "常州市政府数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1137",
+  "name": "绵阳市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1138",
+  "name": "台州市数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1139",
+  "name": "宜昌市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1140",
+  "name": "徐州市公共数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": "DExchangeOpen",
+  "api_url": "http://data.gxj.xz.gov.cn/dexchangeOpen/appauth/getappid",
+  "note": "DExchangeOpen 平台已识别，网关探测 HTTP 404，各地部署参数有差异，需注册后按本地 appId 调用"
+ },
+ {
+  "service_id": "DS-1141",
+  "name": "宜宾市数据开放专题",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1142",
+  "name": "绍兴市公共数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1156",
+  "name": "国家科技图书文献中心(NSTL)",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1175",
+  "name": "沈阳市政务数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": "Jspm",
+  "api_url": "https://data.shenyang.gov.cn/oportal/catalog/",
+  "note": "Jspm 平台(服务端渲染，无公开 JSON 接口)，数据目录页 /oportal/catalog/ 可直接浏览下载"
+ },
+ {
+  "service_id": "DS-1176",
+  "name": "威海市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": "Jspm",
+  "api_url": "http://data.weihai.gov.cn/weihai/catalog/",
+  "note": "Jspm 平台(服务端渲染，无公开 JSON 接口)，数据目录页 /weihai/catalog/ 可直接浏览下载"
+ },
+ {
+  "service_id": "DS-1177",
+  "name": "舟山市公共数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1178",
+  "name": "淄博市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": "Jspm",
+  "api_url": "http://data.zibo.gov.cn/zibo/catalog/",
+  "note": "Jspm 平台(服务端渲染，无公开 JSON 接口)，数据目录页 /zibo/catalog/ 可直接浏览下载"
+ },
+ {
+  "service_id": "DS-1179",
+  "name": "湖州市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1180",
+  "name": "东营市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": "Jspm",
+  "api_url": "http://data.dongying.gov.cn/dongying/catalog/",
+  "note": "Jspm 平台(服务端渲染，无公开 JSON 接口)，数据目录页 /dongying/catalog/ 可直接浏览下载"
+ },
+ {
+  "service_id": "DS-1181",
+  "name": "丽水市数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1182",
+  "name": "滨州市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": "Jspm",
+  "api_url": "http://data.binzhou.gov.cn/binzhou/catalog/",
+  "note": "Jspm 平台(服务端渲染，无公开 JSON 接口)，数据目录页 /binzhou/catalog/ 可直接浏览下载"
+ },
+ {
+  "service_id": "DS-1183",
+  "name": "银川市公共数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": "DExchangeOpen",
+  "api_url": "https://data.yinchuan.gov.cn/dexchangeOpen/appauth/getappid?appId=84247F0E39C54292907674C879033A78&appName=DExchangeOpen&timeStamp=20261001",
+  "note": "接口存活但要求统一身份认证(SSO)，匿名调用拿不到数据，需注册后按 appId 换取 token"
+ },
+ {
+  "service_id": "DS-1184",
+  "name": "柳州市公共数据开放网",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": false,
+  "platform": null,
+  "api_url": null,
+  "note": "域名无法解析（含阿里公共DNS复核），站点已下线或迁入省级平台"
+ },
+ {
+  "service_id": "DS-1185",
+  "name": "连云港市公共数据开放平台",
+  "db_status": "未验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1186",
+  "name": "泰州市数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1187",
+  "name": "淮安市公共数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1188",
+  "name": "盐城市数据开放平台",
+  "db_status": "已验证",
+  "ok": true,
+  "dns": true,
+  "platform": null,
+  "api_url": null,
+  "note": "首页可访问，未识别出已知国产平台"
+ },
+ {
+  "service_id": "DS-1189",
+  "name": "德阳市数据开放平台",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": false,
+  "platform": null,
+  "api_url": null,
+  "note": "域名无法解析（含阿里公共DNS复核），站点已下线或迁入省级平台"
+ },
+ {
+  "service_id": "DS-1190",
+  "name": "乐山市数据开放门户",
+  "db_status": "未验证",
+  "ok": false,
+  "dns": false,
+  "platform": null,
+  "api_url": null,
+  "note": "域名无法解析（含阿里公共DNS复核），站点已下线或迁入省级平台"
+ }
+]
