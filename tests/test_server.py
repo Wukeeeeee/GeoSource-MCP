@@ -27,7 +27,7 @@ def test_list_categories_and_stats():
     data = json.loads(res_str)
 
     assert data["total_services"] == 11054
-    assert data["total_layers"] == 1561
+    assert data["total_layers"] == 18292
     assert "status_distribution" in data
     assert "已验证" in data["status_distribution"]
     assert "未验证" in data["status_distribution"]
