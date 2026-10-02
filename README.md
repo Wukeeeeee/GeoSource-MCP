@@ -97,6 +97,16 @@ The detection rules for each platform:
 | ArcGIS Hub | `GET {root}/api/v3/datasets?page[size]=1` | `"data"` array in JSON |
 | Socrata | `GET {root}/api/catalog/v1` | dataset array or `resultsSetSize` |
 
+A third script keeps the offline viewer in step with the database:
+
+```bash
+# Rebuild the inlined dataset inside viewer.html from gis_services.db -> always run after a DB change
+python scripts/build_viewer.py
+```
+
+`scripts/verify_endpoints.py` is a separate, read-only reachability check (`--sample N` or `--id
+WMS-0001`). It reports HTTP status only and never writes to the database.
+
 ### Chinese Government Portals Are a Different Animal
 
 Domestic 省市"公共数据开放平台" do not run CKAN-style catalogs. `scripts/probe_cn_portals.py`
@@ -161,6 +171,45 @@ A data-quality pass normalized the catalog after the bulk harvest:
   unresolved ones are marked 待复测.
 - Layers: WMS/WFS GetCapabilities responses were parsed and their layer lists inserted, growing
   `layers` from 1,561 to **18,292** rows across 1,201 services.
+
+### `viewer.html` Is a Build Artifact (2026-10-03)
+
+`viewer.html` is a single self-contained offline browser UI — its dataset is **inlined as a JSON
+literal**, not fetched at runtime. It does not track the database: through the entire bulk harvest
+it still showed the 2026-09-29 snapshot (2,198 records / 1,495 verified) while the catalog held
+11,054 / 5,755. Regenerate it after any database change:
+
+```bash
+python scripts/build_viewer.py
+```
+
+The script locates the `DATA = [...]` block and the `ST` stats object by marker and replaces only
+those, so the page's CSS, markup and static help text survive. It is idempotent — running it twice
+produces the same file. Two things it also fixes:
+
+- The detail panel used to splice `data_description`, `layer_or_endpoint` and `notes` straight into
+  `innerHTML`; bulk-harvested notes legitimately contain `$` and `>`, which broke the page. All three
+  are escaped now.
+- The stats bar gains a **protocol-level strong evidence** column (4,749) alongside the others.
+
+Gotchas if you modify the generator: find the end of the `DATA` array with
+`rindex("];", 0, <position of "const ST">)` — searching *forward* with `index` matches the `];` of
+the later `chips` array and silently deletes the whole script between them. And stop the replaced
+slice at `]`, not `];`, so the array's own terminator is preserved.
+
+### Connectivity Baseline (2026-10-03)
+
+A 500-row random sample of verified services, probed with real requests at 40-way concurrency,
+returned **97.2% reachable** (p50 2.0 s, p90 2.9 s). Read that number with care: 12 of the 14
+non-200 responses were `400` (endpoint requires parameters), `401`/`403` (API key required or
+bot-blocking) or `412`/`418` (WAF) — all of which prove the server is alive. Only **2 endpoints
+(0.4%) genuinely timed out**. Per the project rule, a single failed probe never downgrades an entry,
+so no status was changed.
+
+70 catalog rows (`TILE-*`, `HIST-*`) carry `{z}/{x}/{y}` placeholders in `service_url`. That is the
+standard published form for a tile endpoint, not an error, but a probe must substitute real tile
+numbers to mean anything: with `z=11` substituted, 24 of the 44 verified tile services returned a
+real 200 image, and the rest answered 401/403 for want of a key — which the catalog already records.
 
 
 ### Getting Started
@@ -278,6 +327,16 @@ WMS 必须返回 `WMS_Capabilities`，STAC 必须返回 `stac_version`，ArcGIS 
 | ArcGIS Hub | `GET {root}/api/v3/datasets?page[size]=1` | JSON 中含 `"data"` 数组 |
 | Socrata | `GET {root}/api/catalog/v1` | 数据集数组或 `resultsSetSize` 字段 |
 
+还有第三个脚本负责让离线查询页跟上数据库：
+
+```bash
+# 3) 重新生成 viewer.html 内嵌的数据 -> 改库后必须执行
+python scripts/build_viewer.py
+```
+
+`scripts/verify_endpoints.py` 是另一个只读的连通性抽查工具（`--sample N` 或 `--id WMS-0001`），
+它只报 HTTP 状态码，永远不写库。
+
 ### 从门户登记册批量扩库（2026-10-02）
 
 本轮一次性入库 8,845 条，靠的是 [dataportals-registry](https://github.com/datenoio/dataportals-registry)
@@ -310,6 +369,36 @@ WMS 必须返回 `WMS_Capabilities`，STAC 必须返回 `stac_version`，ArcGIS 
   解析真实 CRS（254 条），解析不出的标 `待复测`。
 - 图层：解析 WMS/WFS GetCapabilities 并回填 `layers` 表，从 1,561 行增至 **18,292 行**，
   覆盖 1,201 个服务。
+
+### viewer.html 是生成物（2026-10-03）
+
+`viewer.html` 是一个单文件、离线可用的浏览器查询界面，但里面的数据是**内嵌的 JSON 字面量**，
+不会运行时去读数据库——整个批量扩库期间它一直显示 9/29 的快照（2,198 条 / 已验证 1,495），
+而库里早已是 11,054 / 5,755。**改库之后必须重新生成**：
+
+```bash
+python scripts/build_viewer.py
+```
+
+脚本按标记定位 `DATA = [...]` 与 `ST` 统计块，只替换这两段，页面的 CSS、结构和静态说明文字不动。
+可重复执行，跑两次结果一致。它同时修掉两个问题：详情面板原先把 `data_description`、
+`layer_or_endpoint`、`notes` 直接拼进 `innerHTML`，而批量入库的备注里确实有 `$`、`>` 这类字符，
+会破坏页面，现已统一转义；统计栏新增**协议级强证据**一栏（4,749）。
+
+若要改这个生成器，有两个坑：DATA 数组的结尾要用 `rindex("];", 0, <"const ST" 的位置>)` 往前找，
+用 `index` 往后找会撞上后面 chips 数组的 `];`，把中间整段脚本悄悄删掉；替换区间要停在 `]` 而不是
+`];`，否则数组自己的收尾分号会被一并删掉。
+
+### 联通测试基线（2026-10-03）
+
+随机抽 500 条已验证服务、40 并发发真实请求，**可达率 97.2%**（p50 2.0 秒、p90 2.9 秒）。这个数字要
+这么读：14 条非 200 里有 12 条是 `400`（端点缺必填参数）、`401`/`403`（要 API Key 或反爬）、
+`412`/`418`（WAF 防护）——它们恰恰证明服务器活着。**真正超时的只有 2 条（0.4%）**。按项目铁律，
+单次探测失败不改判，因此未改动任何条目的状态。
+
+目录里有 70 条（`TILE-*`、`HIST-*`）的 `service_url` 含 `{z}/{x}/{y}` 占位符。这是瓦片服务的标准
+发布形式、不是错误，但探测时必须替换成真实瓦片号才有意义：代入 `z=11` 后，44 条已验证瓦片服务里
+24 条返回了真实的 200 图片，其余 401/403 是缺 Key——而这一点目录里本来就有标注。
 
 
 ### 快速开始
