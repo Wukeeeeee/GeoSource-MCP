@@ -16,10 +16,12 @@
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10+-brightgreen.svg" alt="Python"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License"></a>
   <img src="https://img.shields.io/badge/Catalog-11%2C054%20Services-blue.svg" alt="Services">
-  <img src="https://img.shields.io/badge/Verified-5%2C755%20Active-green.svg" alt="Verified">
+  <img src="https://img.shields.io/badge/Verified-5%2C771%20Active-green.svg" alt="Verified">
   <img src="https://img.shields.io/badge/Layers-18%2C292-purple.svg" alt="Layers">
   <a href="https://mcpservers.org/servers/wukeeeeee/geosource-mcp"><img src="https://mcpservers.org/badge.svg"></a>
 </p>
+
+> 🗺️ **交互与检索看板**: 访问 [viewer.html](viewer.html) 即可在纯黑白灰工程风界面中查询 11,054 条空间服务，或切换到「全球态势地图」进行多边形面交互与中国 34 省级行政区无缝下钻。
 
 ---
 
@@ -33,11 +35,12 @@ When developers build maps, spatial analysis pipelines, or GIS crawlers using AI
 
 ### Key Engineering Features
 - **Structured Discovery**: Helps AI models locate existing, functional endpoints rather than guessing URLs.
+- **Interactive Global Map & Explorer**: Browse services visually via [viewer.html](viewer.html) with dark brutalist monochrome aesthetics, boundary polygon highlighting, One-China compliant provincial drilldown, and one-click URL copying.
 - **Low-Overhead Retrieval**: Fetches only matching records (typically 200 ~ 500 tokens per search) on demand, avoiding the cost and latency of loading megabytes of raw files into prompts.
 - **Transparent Verification**: Tracks explicit availability statuses, each backed by a recorded method in `verify_method`:
-  - **5,755 Verified Active** (52.1%): Confirmed accessible. 4,749 of them carry protocol-level proof (a WMS that actually returns `WMS_Capabilities`, a STAC API that returns `stac_version`, an ArcGIS REST service document).
-  - **5,245 Pending / Unverified** (47.4%): Cataloged entries whose portal is reachable but no anonymous protocol-level endpoint was found in a six-path probe (GeoServer/CKAN/ArcGIS Hub/REST/GeoNode/Socrata); each entry records the probe result in `notes`.
-  - **54 Deprecated / Inactive** (0.5%): Documented legacy services retained for reference.
+  - **5,771 Verified Active**: Confirmed accessible. 4,749 of them carry protocol-level proof (a WMS that actually returns `WMS_Capabilities`, a STAC API that returns `stac_version`, an ArcGIS REST service document).
+  - **5,245 Pending / Unverified**: Cataloged entries whose portal is reachable but no anonymous protocol-level endpoint was found in a six-path probe (GeoServer/CKAN/ArcGIS Hub/REST/GeoNode/Socrata); each entry records the probe result in `notes`.
+  - **54 Deprecated / Inactive**: Documented legacy services retained for reference.
   - A failed probe never downgrades an entry on its own: a single failure cannot distinguish a dead service from a blocked cross-border route or UA filtering, so the reason is recorded instead.
 - **Two-Way Maintenance**: Supports Excel synchronization and provides tools for AI agents to report status updates and new endpoints.
 
@@ -264,11 +267,12 @@ In your IDE's MCP settings, add a new stdio server:
 
 ### 工程特性与设计原则
 - **结构化发现，降低幻觉**：提供经过结构化收录的真实服务端点，辅助 AI 编写准确的地图调用代码。
+- **集成全球态势地图与属地化下钻**：在 [viewer.html](viewer.html) 内置直角黑白灰工程风交互地图，支持国际版图多边形高亮交互，严格遵循一个中国原则并支持全国 34 省级行政区无缝下钻与服务条目筛选复制。
 - **按需低开销检索**：每次仅检索返回匹配的 3~5 条记录（约 200~500 Tokens），避免将数兆字节的原始表格强行填入上下文窗口。
 - **透明的可用性状态**（每条的验证方式都记录在 `verify_method` 字段，可逐条追溯）：
-  - **已验证**（5,755 条，占比 52.1%）：经探测确认为可用。其中 4,749 条带**协议级实证**——WMS 真的返回了 `WMS_Capabilities`、STAC 真的返回了 `stac_version`、ArcGIS REST 真的返回了服务文档。
-  - **未验证**（5,245 条，占比 47.4%）：门户可达但未探到匿名可调用的协议级接口（六条常见路径探测无果），或受跨国网络连通性限制；每条的探测结果都写在 `notes`。
-  - **已停止**（54 条，占比 0.5%）：已下线或历史归档服务，保留供查阅追溯。
+  - **已验证**（5,771 条）：经探测确认为可用。其中 4,749 条带**协议级实证**——WMS 真的返回了 `WMS_Capabilities`、STAC 真的返回了 `stac_version`、ArcGIS REST 真的返回了服务文档。
+  - **未验证**（5,245 条）：门户可达但未探到匿名可调用的协议级接口（六条常见路径探测无果），或受跨国网络连通性限制；每条的探测结果都写在 `notes`。
+  - **已停止**（54 条）：已下线或历史归档服务，保留供查阅追溯。
   - **探测失败不会直接改判为"未验证"**：单次失败无法区分"服务真下线"、"本地到该站的跨境链路被阻断"、"对脚本 UA 返回 403 但浏览器正常"这三种情况，因此只记录失败原因，保留原状态。
 - **双向维护支持**：支持与 Excel 表格双向数据同步，并提供更新接口供 AI 助手汇报失效链接与新地址。
 
