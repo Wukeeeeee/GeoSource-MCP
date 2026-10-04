@@ -19,6 +19,7 @@
   <img src="https://img.shields.io/badge/Verified-5%2C771%20Active-green.svg" alt="Verified">
   <img src="https://img.shields.io/badge/Layers-18%2C292-purple.svg" alt="Layers">
   <a href="https://mcpservers.org/servers/wukeeeeee/geosource-mcp"><img src="https://mcpservers.org/badge.svg"></a>
+  <a href="https://m8ven.ai/mcp/wukeeeeee/geosource-mcp?s=readme"><img src="https://m8ven.ai/badge/mcp/wukeeeeee/geosource-mcp" alt="M8ven Score"></a>
 </p>
 
 > 🗺️ **交互与检索看板**: 访问 [viewer.html](viewer.html) 即可在纯黑白灰工程风界面中查询 11,054 条空间服务，或切换到「全球态势地图」进行多边形面交互与中国 34 省级行政区无缝下钻。

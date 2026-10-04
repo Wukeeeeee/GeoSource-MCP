@@ -13,6 +13,7 @@ import json
 from datetime import datetime
 from typing import Optional, List, Dict, Any
 from mcp.server.fastmcp import FastMCP
+from mcp.types import ToolAnnotations
 
 # Ensure stdout/stderr handles UTF-8 properly on Windows
 if sys.platform == "win32":
@@ -57,7 +58,14 @@ def get_db_connection(read_only: bool = True) -> sqlite3.Connection:
     return conn
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=False
+    )
+)
 def search_gis_services(
     keyword: Optional[str] = None,
     country: Optional[str] = None,
@@ -149,7 +157,14 @@ def search_gis_services(
     }, ensure_ascii=False, indent=2)
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=False
+    )
+)
 def get_service_detail(service_id: str) -> str:
     """
     Get full metadata (50+ fields) and child layers for a specific GIS service by its service_id (e.g. 'WMS-0001', 'DS-0001').
@@ -183,7 +198,14 @@ def get_service_detail(service_id: str) -> str:
     return json.dumps(service_data, ensure_ascii=False, indent=2)
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=False
+    )
+)
 def list_categories_and_stats() -> str:
     """
     Get an overview of database statistics, including total services, status breakdown (verified, unverified, stopped),
@@ -222,7 +244,14 @@ def list_categories_and_stats() -> str:
     }, ensure_ascii=False, indent=2)
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=False
+    )
+)
 def query_gis_sql(query: str) -> str:
     """
     Execute a safe, read-only SQL SELECT query directly against the SQLite database for custom queries.
@@ -268,7 +297,14 @@ def query_gis_sql(query: str) -> str:
         conn.close()
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        readOnlyHint=False,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=False
+    )
+)
 def update_service_status(
     service_id: str,
     new_url: Optional[str] = None,
@@ -424,7 +460,14 @@ def _portal_root(url: Optional[str]) -> Optional[str]:
     return u.rstrip("/") or None
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=True
+    )
+)
 def probe_service_api(
     service_id: Optional[str] = None,
     url: Optional[str] = None,
