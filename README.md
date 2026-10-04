@@ -19,6 +19,7 @@
   <img src="https://img.shields.io/badge/Verified-5%2C771%20Active-green.svg" alt="Verified">
   <img src="https://img.shields.io/badge/Layers-18%2C292-purple.svg" alt="Layers">
   <a href="https://mcpservers.org/servers/wukeeeeee/geosource-mcp"><img src="https://mcpservers.org/badge.svg"></a>
+  <a href="https://github.com/Wukeeeeee/GeoSource-MCP/actions/workflows/ci.yml"><img src="https://github.com/Wukeeeeee/GeoSource-MCP/actions/workflows/ci.yml/badge.svg" alt="CI Quality Gate"></a>
   <a href="https://m8ven.ai/mcp/wukeeeeee/geosource-mcp?s=readme"><img src="https://m8ven.ai/badge/mcp/wukeeeeee/geosource-mcp" alt="M8ven Score"></a>
 </p>
 
