@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "geosource-mcp"
 version = "0.1.1"
-description = "A Model Context Protocol (MCP) server for discovering 11,054+ global GIS services, spatial layers, and open endpoints."
+description = "A Model Context Protocol (MCP) server for discovering 11,147+ global GIS services, spatial layers, and open endpoints."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

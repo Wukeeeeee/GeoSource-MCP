@@ -15,15 +15,15 @@
   <a href="https://glama.ai/mcp/servers"><img src="https://img.shields.io/badge/Glama-Approved-10b981.svg" alt="Glama Approved"></a>
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10+-brightgreen.svg" alt="Python"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License"></a>
-  <img src="https://img.shields.io/badge/Catalog-11%2C054%20Services-blue.svg" alt="Services">
-  <img src="https://img.shields.io/badge/Verified-5%2C771%20Active-green.svg" alt="Verified">
-  <img src="https://img.shields.io/badge/Layers-18%2C292-purple.svg" alt="Layers">
+  <img src="https://img.shields.io/badge/Catalog-11%2C147%20Services-blue.svg" alt="Services">
+  <img src="https://img.shields.io/badge/Verified-5%2C970%20Active-green.svg" alt="Verified">
+  <img src="https://img.shields.io/badge/Layers-56%2C969-purple.svg" alt="Layers">
   <a href="https://mcpservers.org/servers/wukeeeeee/geosource-mcp"><img src="https://mcpservers.org/badge.svg"></a>
   <a href="https://github.com/Wukeeeeee/GeoSource-MCP/actions/workflows/ci.yml"><img src="https://github.com/Wukeeeeee/GeoSource-MCP/actions/workflows/ci.yml/badge.svg" alt="CI Quality Gate"></a>
   <a href="https://m8ven.ai/mcp/wukeeeeee/geosource-mcp?s=readme"><img src="https://m8ven.ai/badge/mcp/wukeeeeee/geosource-mcp" alt="M8ven Score"></a>
 </p>
 
-> 🗺️ **交互与检索看板**: 访问 [viewer.html](viewer.html) 即可在纯黑白灰工程风界面中查询 11,054 条空间服务，或切换到「全球态势地图」进行多边形面交互与中国 34 省级行政区无缝下钻。
+> 🗺️ **交互与检索看板**: 访问 [viewer.html](viewer.html) 即可在纯黑白灰工程风界面中查询 11,147 条空间服务，或切换到「全球态势地图」进行多边形面交互与中国 34 省级行政区无缝下钻。
 
 ---
 
@@ -31,7 +31,7 @@
 ## 🌐 English
 
 ### Overview
-**GeoSource MCP** is an open-source [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server providing structured access to an indexed catalog of **11,054 global GIS spatial services** and **18,292 sub-layers**.
+**GeoSource MCP** is an open-source [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server providing structured access to an indexed catalog of **11,147 global GIS spatial services** and **56,969 sub-layers**.
 
 When developers build maps, spatial analysis pipelines, or GIS crawlers using AI assistants (Claude Desktop, Cursor, Windsurf, etc.), large language models frequently struggle to locate real-world endpoints or generate non-functional URLs. GeoSource MCP connects AI environments directly to an indexed local SQLite database (`gis_services.db`), enabling low-latency, multi-criteria discovery of verified spatial services across OGC WMS, WFS, WMTS, XYZ Tiles, ArcGIS REST, STAC, and Open Data APIs.
 
@@ -40,8 +40,8 @@ When developers build maps, spatial analysis pipelines, or GIS crawlers using AI
 - **Interactive Global Map & Explorer**: Browse services visually via [viewer.html](viewer.html) with dark brutalist monochrome aesthetics, boundary polygon highlighting, One-China compliant provincial drilldown, and one-click URL copying.
 - **Low-Overhead Retrieval**: Fetches only matching records (typically 200 ~ 500 tokens per search) on demand, avoiding the cost and latency of loading megabytes of raw files into prompts.
 - **Transparent Verification**: Tracks explicit availability statuses, each backed by a recorded method in `verify_method`:
-  - **5,771 Verified Active**: Confirmed accessible. 4,749 of them carry protocol-level proof (a WMS that actually returns `WMS_Capabilities`, a STAC API that returns `stac_version`, an ArcGIS REST service document).
-  - **5,245 Pending / Unverified**: Cataloged entries whose portal is reachable but no anonymous protocol-level endpoint was found in a six-path probe (GeoServer/CKAN/ArcGIS Hub/REST/GeoNode/Socrata); each entry records the probe result in `notes`.
+  - **5,970 Verified Active**: Confirmed accessible. 4,959 of them carry protocol-level proof (a WMS that actually returns `WMS_Capabilities`, a STAC API that returns `stac_version`, an ArcGIS REST service document).
+  - **5,123 Pending / Unverified**: Cataloged entries whose portal is reachable but no anonymous protocol-level endpoint was found (twelve-path battery: GeoServer/CKAN/ArcGIS Hub/REST/GeoNode/Socrata + THREDDS/CSW/ERDDAP/data.json variants); each entry records the probe result in `notes`.
   - **54 Deprecated / Inactive**: Documented legacy services retained for reference.
   - A failed probe never downgrades an entry on its own: a single failure cannot distinguish a dead service from a blocked cross-border route or UA filtering, so the reason is recorded instead.
 - **Two-Way Maintenance**: Supports Excel synchronization and provides tools for AI agents to report status updates and new endpoints.
@@ -217,6 +217,33 @@ numbers to mean anything: with `z=11` substituted, 24 of the 44 verified tile se
 real 200 image, and the rest answered 401/403 for want of a key — which the catalog already records.
 
 
+### Re-verification & Thematic Round (2026-10-07)
+
+Round 10 re-probed all 5,245 unverified entries with a twelve-path battery (~67k real requests) and
+added 93 new sources from curated registries:
+
+- **Battery upgrades, then an honest audit.** 216 hosts answered at protocol level on paths the
+  previous six-path battery never tried (`/wms`, `/ows`, `/geoserver/ows`, THREDDS, GeoNetwork,
+  Opendatasoft, pycsw, data.json, DKAN). A strict re-check of every hit then **reverted 94** whose
+  "data.json"/"THREDDS" match was just an HTML page referencing those strings; 5 hard-signature hits
+  (real `WMS_Capabilities`/WFS XML) whose re-check failed on transient SSL/timeout were restored.
+  Net: **+215 verified** (5,755 → 5,970).
+- **awesome-erddap registry**: 45 servers, 32 not yet in the catalog; 22 admitted (21 with a
+  protocol-level `search/index.csv` response, 1 weak), 10 dead or gated.
+- **STAC Index registry**: 148 catalogs, 73 public ones missing; 52 admitted after confirming
+  `stac_version` in the response (incl. Google Earth Engine's catalog, confirmed by full read);
+  2 skipped because their URLs embed an API key; 14 dead.
+- **GeoNode gallery leftovers**: 24 instances still unexplored, 9 admitted with live
+  `WMS_Capabilities` — including 6 that earlier rounds had recorded as "unreachable from this
+  machine" (Thünen Atlas, Sardegna CEDOC, …), a direct payoff of re-probing stale failures.
+- **Thematic depth**: GLIMS glacier WMS (54 layers incl. RGI 7.0), NOAA NCEP OpenGeo (940 layers),
+  BOM THREDDS, NT Geological Survey, BGS 1:50k geology, FEMA GeoServer.
+- **Layers**: parsed Capabilities for every verified WMS/WFS lacking a layer list — `layers` grew
+  from 18,292 to **56,969** rows across 1,394 services. Parse failures were recorded in `notes`,
+  not used to change any status.
+- Two Excel deliverables were rebuilt from the database (`scripts/build_xlsx.py`), fixing months of
+  drift; xlsx now also has a regenerable build script like viewer.html.
+
 ### Getting Started
 
 #### 1. Requirements & Installation
@@ -263,7 +290,7 @@ In your IDE's MCP settings, add a new stdio server:
 ## 🇨🇳 中文说明
 
 ### 项目简介
-**GeoSource MCP** 是一个基于 [Model Context Protocol (MCP)](https://modelcontextprotocol.io) 标准的开源数据服务程序。它为各类 AI 编程与分析助手（Claude Desktop、Cursor、Windsurf 等）提供对本地结构化索引的 **11,054 个全球真实 GIS 空间服务** 与 **18,292 个地图图层** 的检索工具。
+**GeoSource MCP** 是一个基于 [Model Context Protocol (MCP)](https://modelcontextprotocol.io) 标准的开源数据服务程序。它为各类 AI 编程与分析助手（Claude Desktop、Cursor、Windsurf 等）提供对本地结构化索引的 **11,147 个全球真实 GIS 空间服务** 与 **56,969 个地图图层** 的检索工具。
 
 在开发地图应用或编写空间数据处理脚本时，大模型通常无法准确掌握全球各机构公开的实时服务接口，容易推断出不可用的链接。GeoSource MCP 直接连接本地 SQLite 数据库（`gis_services.db`），帮助 AI 快速检索真实的可用服务与图层参数。
 
@@ -406,6 +433,29 @@ python scripts/build_viewer.py
 发布形式、不是错误，但探测时必须替换成真实瓦片号才有意义：代入 `z=11` 后，44 条已验证瓦片服务里
 24 条返回了真实的 200 图片，其余 401/403 是缺 Key——而这一点目录里本来就有标注。
 
+
+### 复测与专题纵深轮（2026-10-07）
+
+第十轮用十二条路径的探测电池复测了全部 5,245 条未验证条目（约 6.7 万次真实请求），
+并从三个策划登记册新增 93 个源：
+
+- **电池升级 + 如实复审**。216 台主机在上一轮没试过的路径上给出协议级应答
+  （`/wms`、`/ows`、`/geoserver/ows`、THREDDS、GeoNetwork、Opendatasoft、pycsw、data.json、DKAN）。
+  对每条命中做严格复审后**撤回 94 条**——那些 "data.json"/"THREDDS" 匹配只是 HTML 页面里引用了
+  这些字符串；5 条硬签名命中（真 `WMS_Capabilities`/WFS XML）复审时因瞬时 SSL/超时失败，按
+  "单次失败不改判"铁律恢复。净增**已验证 +215**（5,755 → 5,970）。
+- **awesome-erddap 登记册**：45 台中 32 台未收录，收 22 台（21 台 search API 返回规范 CSV 头、
+  1 台弱证据），10 台死或受限。
+- **STAC Index 登记册**：148 个目录中 73 个 public 未收录，52 个在响应中确认 `stac_version` 后收
+  录（含 Google Earth Engine 目录，全量读取确认）；2 个因 URL 内嵌 API key 不收；14 个死。
+- **GeoNode 画廊存量**：还剩 24 个实例没测，9 个以真实 `WMS_Capabilities` 入库——其中 6 个是
+  前几轮记录"本机不可达"的（Thünen Atlas、Sardegna CEDOC 等），复测存量直接兑现。
+- **专题纵深**：GLIMS 冰川 WMS（54 图层含 RGI 7.0）、NOAA NCEP OpenGeo（940 图层）、
+  澳大利亚气象局 THREDDS、北领地地质调查局、BGS 1:50k 地质、FEMA GeoServer。
+- **图层**：对所有缺图层的已验证 WMS/WFS 解析 Capabilities，`layers` 从 18,292 行增至
+  **56,969 行**（1,394 个服务）。解析失败只记 `notes`，不改状态。
+- 两个 Excel 交付物从数据库重建（新增 `scripts/build_xlsx.py`），修复数月的数字漂移；
+  xlsx 现在也和 viewer.html 一样有了可重跑的生成脚本。
 
 ### 快速开始
 
