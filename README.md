@@ -16,7 +16,7 @@
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10+-brightgreen.svg" alt="Python"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License"></a>
   <img src="https://img.shields.io/badge/Catalog-11%2C147%20Services-blue.svg" alt="Services">
-  <img src="https://img.shields.io/badge/Verified-5%2C970%20Active-green.svg" alt="Verified">
+  <img src="https://img.shields.io/badge/Verified-6%2C137%20Active-green.svg" alt="Verified">
   <img src="https://img.shields.io/badge/Layers-56%2C969-purple.svg" alt="Layers">
   <a href="https://mcpservers.org/servers/wukeeeeee/geosource-mcp"><img src="https://mcpservers.org/badge.svg"></a>
   <a href="https://github.com/Wukeeeeee/GeoSource-MCP/actions/workflows/ci.yml"><img src="https://github.com/Wukeeeeee/GeoSource-MCP/actions/workflows/ci.yml/badge.svg" alt="CI Quality Gate"></a>
@@ -40,8 +40,8 @@ When developers build maps, spatial analysis pipelines, or GIS crawlers using AI
 - **Interactive Global Map & Explorer**: Browse services visually via [viewer.html](viewer.html) with dark brutalist monochrome aesthetics, boundary polygon highlighting, One-China compliant provincial drilldown, and one-click URL copying.
 - **Low-Overhead Retrieval**: Fetches only matching records (typically 200 ~ 500 tokens per search) on demand, avoiding the cost and latency of loading megabytes of raw files into prompts.
 - **Transparent Verification**: Tracks explicit availability statuses, each backed by a recorded method in `verify_method`:
-  - **5,970 Verified Active**: Confirmed accessible. 4,959 of them carry protocol-level proof (a WMS that actually returns `WMS_Capabilities`, a STAC API that returns `stac_version`, an ArcGIS REST service document).
-  - **5,123 Pending / Unverified**: Cataloged entries whose portal is reachable but no anonymous protocol-level endpoint was found (twelve-path battery: GeoServer/CKAN/ArcGIS Hub/REST/GeoNode/Socrata + THREDDS/CSW/ERDDAP/data.json variants); each entry records the probe result in `notes`.
+  - **6,137 Verified Active**: Confirmed accessible. 5,122 of them carry protocol-level proof (a WMS that actually returns `WMS_Capabilities`, a STAC API that returns `stac_version`, an ArcGIS REST service document).
+  - **4,956 Pending / Unverified**: Cataloged entries whose portal is reachable but no anonymous protocol-level endpoint was found (twelve-path battery: GeoServer/CKAN/ArcGIS Hub/REST/GeoNode/Socrata + THREDDS/CSW/ERDDAP/data.json variants); each entry records the probe result in `notes`.
   - **54 Deprecated / Inactive**: Documented legacy services retained for reference.
   - A failed probe never downgrades an entry on its own: a single failure cannot distinguish a dead service from a blocked cross-border route or UA filtering, so the reason is recorded instead.
 - **Two-Way Maintenance**: Supports Excel synchronization and provides tools for AI agents to report status updates and new endpoints.
@@ -243,6 +243,27 @@ added 93 new sources from curated registries:
   not used to change any status.
 - Two Excel deliverables were rebuilt from the database (`scripts/build_xlsx.py`), fixing months of
   drift; xlsx now also has a regenerable build script like viewer.html.
+
+### Freshness Pass & Battery Round 2 (2026-10-07)
+
+- **Rolling freshness re-probe**: the 2,411 entries verified before 2026-10-02 were re-probed against
+  their declared protocol. 1,461 reconfirmed at protocol level and had `last_verified` refreshed;
+  failures were recorded in `notes` only — no status was changed, per the standing rule. This is now
+  a repeating maintenance step: oldest first, every round.
+- **Battery round 2** tried nine *new* service mounts on all 4,956 still-unverified hosts
+  (~45k requests): `/arcgis/rest/services`, `/server/rest/services`, `/rest/services`, WMTS
+  endpoints, OGC API Features `/collections`, pycsw, Lizmap. 167 upgrades, of which **162 were
+  ArcGIS Servers hiding at non-`/arcgis` paths** — the previous batteries only looked under
+  `/arcgis`. Net verified: 5,970 → **6,137**.
+- **Semantic reclassification round 2**: description-keyword rules moved 137 entries out of the
+  generic pool (cadastral → 测绘, groundwater → 水文, orthophoto → 遥感/影像, national statistics
+  → 人口/社会经济…), with a multi-domain guard that keeps country-scale portals generic. A
+  dataset-title classifier (fetch 20 live dataset titles per portal) was also **tested and
+  rejected**: portal-level titles are too noisy to justify automated moves.
+- `viewer.html`'s map payload is now **self-contained**: boundaries live in `assets/`, counts and
+  service lists are computed from the database at build time — the build no longer depends on a
+  scratch file from another machine. Map verified in-browser (world choropleth, China provincial
+  drilldown, per-country service cards).
 
 ### Getting Started
 
@@ -456,6 +477,21 @@ python scripts/build_viewer.py
   **56,969 行**（1,394 个服务）。解析失败只记 `notes`，不改状态。
 - 两个 Excel 交付物从数据库重建（新增 `scripts/build_xlsx.py`），修复数月的数字漂移；
   xlsx 现在也和 viewer.html 一样有了可重跑的生成脚本。
+
+### 保鲜复测与电池二轮（2026-10-07）
+
+- **滚动保鲜复测**：对 2026-10-02 之前验证的 2,411 条按声明协议重探，1,461 条协议级确认存活并
+  刷新 `last_verified`；失败只记 `notes`，状态零变动（铁律）。此后每轮固定做，最老的优先。
+- **电池二轮**对全部 4,956 条仍未验证的主机试了 9 条全新挂载路径（约 4.5 万次请求）：
+  `/arcgis/rest/services`、`/server/rest/services`、`/rest/services`、WMTS、OGC API Features
+  `/collections`、pycsw、Lizmap。167 条升级，其中 **162 个是把 ArcGIS Server 藏在非 `/arcgis`
+  路径下的站点**——此前电池只盯着 `/arcgis` 看。已验证 5,970 → **6,137**。
+- **语义归类二期**：描述关键词规则把 137 条挪出泛化类（地籍→测绘、地下水→水文、正射影像→遥感、
+  国家统计局→人口/社会经济），并加"多域守门"——国家/大都市综合门户命中 3 类以上就留在综合类。
+  另试验了"拉真实数据集标题归类"，**试验后否决**：门户级标题噪声太大，不足以支撑自动挪类。
+- `viewer.html` 的地图 payload 改为**自包含**：边界数据入库 `assets/`，计数与服务列表构建时从
+  数据库现算，不再依赖另一台机器的 scratch 文件。地图已在浏览器验收（全球填色、中国省级下钻、
+  各国服务卡片）。
 
 ### 快速开始
 

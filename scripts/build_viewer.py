@@ -8,9 +8,13 @@ from datetime import date
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-ROOT = Path(r"e:\my_repo\GeoSource")
+ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "gis_services.db"
 HTML = ROOT / "viewer.html"
+WORLD_GEO = ROOT / "assets" / "world_boundaries.geojson"
+CHINA_GEO = ROOT / "assets" / "china_provinces.geojson"
+ISO_MAP = ROOT / "assets" / "country_iso_map.json"
+# 兼容旧版：若存在其他会话的 scratch payload 仍优先使用
 PAYLOAD_PATH = Path(r"C:\Users\13469\.gemini\antigravity\brain\28484e4b-0b0c-410d-90c6-bbad4205cc15\scratch\map_payload.json")
 
 FIELD_MAP = [
@@ -73,6 +77,133 @@ def build_data(conn):
         rows.append(d)
     return rows
 
+def build_map_payload(conn):
+    """从 gis_services.db 现算地图 payload：边界取自 assets/，计数与服务列表取自库。
+    国家→ISO 映射见 assets/country_iso_map.json；映射不到的区域型条目（全球/欧洲/多国等）
+    归入全球公共池。中国条目按省名匹配进 34 省级池，未命中归 china_national。
+    """
+    world_geo = json.loads(WORLD_GEO.read_text(encoding="utf-8"))
+    provinces_geo = json.loads(CHINA_GEO.read_text(encoding="utf-8"))
+    iso_map = json.loads(ISO_MAP.read_text(encoding="utf-8"))
+    CN_POOL = {"CN", "HK", "MO", "TW"}
+
+    # —— 全国行，按短名匹配省份 ——
+    PROVS = [f["properties"]["short"] for f in provinces_geo["features"]]
+    prov_services = {p: [] for p in PROVS}
+    prov_services[""] = []
+    china_national = []
+    intl = {}
+
+    rows = conn.execute(
+        "SELECT service_id,service_name,country,region,provider,category,service_type,protocol,"
+        "official_url,service_url,data_description,spatial_coverage,status,verify_method,"
+        "need_no_key,is_free,global_coverage,free FROM master"
+    ).fetchall()
+    cols = ["id", "name", "country", "region", "provider", "cat", "type", "proto", "off",
+            "url", "desc", "spat", "status", "vmethod", "nokey", "isfree", "glob", "free"]
+
+    def card(r):
+        d = dict(zip(cols, r))
+        return {k: d[k] for k in ("id", "name", "proto", "cat", "free", "nokey", "url",
+                                  "status", "desc") if d.get(k) is not None}
+
+    for r in rows:
+        d = dict(zip(cols, r))
+        country = (d["country"] or "").strip()
+        iso = iso_map.get(country)
+        card_r = card(r)
+        if iso in CN_POOL or country in ("中国", "中国香港", "中国台湾", "中国澳门", "香港", "澳门", "台湾", "Taiwan"):
+            text = "".join(str(x) for x in (d["region"], d["name"], d["desc"], d["spat"],
+                                            d["provider"], d["country"]))
+            hit = next((p for p in PROVS if p and p in text), None)
+            if hit:
+                prov_services[hit].append(card_r)
+            else:
+                prov_services[""].append(card_r)
+                china_national.append(card_r)
+        elif iso:
+            intl.setdefault(iso, []).append(card_r)
+
+    # 每国列表按 已验证→strong 优先排序并截断，防止 payload 膨胀
+    def trim(lst, cap=40):
+        lst.sort(key=lambda s: (s.get("status") != "已验证", "strong" not in (s.get("vmethod") or "")))
+        return lst[:cap]
+
+    for k in list(prov_services):
+        prov_services[k] = trim(prov_services[k])
+    china_national = trim(china_national)
+    for k in list(intl):
+        intl[k] = trim(intl[k])
+
+    # —— 全球公共池：非国家型条目（映射不到 ISO 的区域/多国/全球）+ 全球覆盖行 ——
+    c = conn.cursor()
+    glob_q = """
+        SELECT service_id,service_name,protocol,category,service_url,data_description,status
+        FROM master
+        WHERE (global_coverage='是' OR country LIKE '全球%' OR country IN
+              ('国际组织','国际','欧洲','北美','南美','南极','北极','非洲(区域)','加勒比','未知',
+               '大洋洲','亚洲','拉丁美洲/加勒比','西非/萨赫勒','区域(东非/南部非洲)','欧洲空间局',
+               '欧盟','Oceania','Latin America')
+              OR country LIKE '多国%' OR country LIKE '%/全球%' OR country LIKE '全球/%'
+              OR country LIKE '%/欧洲%' OR country LIKE '欧盟%' OR country LIKE '%欧洲'
+              OR country LIKE '德国%' OR country LIKE '美国/%' OR country LIKE '%/中国%'
+              OR country LIKE '%奥地利%' OR country LIKE '%丹麦%' OR country LIKE '%瑞典%'
+              OR country LIKE '芬兰%' OR country LIKE '英国%' OR country LIKE '荷兰%'
+              OR country LIKE '葡萄牙%' OR country LIKE '卢森堡%' OR country LIKE '法国%'
+              OR country LIKE '匈牙利%' OR country LIKE '日本%' OR country LIKE '韩国%'
+              OR country LIKE '%;%' OR country LIKE '%地区%')
+        ORDER BY CASE WHEN status='已验证' THEN 0 ELSE 1 END
+    """
+    global_rows = c.execute(glob_q).fetchall()
+    global_services = [
+        {"id": r[0], "name": r[1], "proto": r[2], "cat": r[3], "url": r[4],
+         "desc": r[5], "status": r[6]}
+        for r in global_rows[:80]
+    ]
+    global_data = {"name": "跨国与全球公共数据", "count": len(global_rows),
+                   "verified": c.execute(
+                       "SELECT count(*) FROM master WHERE status='已验证' AND "
+                       "(global_coverage='是' OR country LIKE '全球%' OR country IN ('国际组织','国际'))"
+                   ).fetchone()[0],
+                   "services": global_services}
+
+    # —— 世界要素计数（按 ISO 从库现算） ——
+    stat = {}
+    for (cty, n_v, n_a, n_f) in conn.execute(
+        "SELECT country, "
+        "sum(CASE WHEN status='已验证' THEN 1 ELSE 0 END), count(*), "
+        "sum(CASE WHEN is_free='是' THEN 1 ELSE 0 END) FROM master GROUP BY country"
+    ):
+        iso = iso_map.get((cty or "").strip())
+        if iso:
+            s = stat.setdefault(iso, {"count": 0, "verified": 0, "free": 0})
+            s["count"] += n_a; s["verified"] += n_v; s["free"] += n_f
+
+    for f in world_geo["features"]:
+        pr = f["properties"]
+        iso = pr.get("iso")
+        if iso == "CN":
+            cn = stat.get("CN", {"count": 0, "verified": 0, "free": 0})
+            for k2 in ("HK", "MO", "TW"):
+                s2 = stat.get(k2)
+                if s2:
+                    cn["count"] += s2["count"]; cn["verified"] += s2["verified"]
+                    cn["free"] += s2["free"]
+            pr.update(count=cn["count"], verified=cn["verified"], free=cn["free"], is_china=True)
+        else:
+            s = stat.get(iso, {})
+            pr.update(count=s.get("count", 0), verified=s.get("verified", 0),
+                      free=s.get("free", 0), is_china=False)
+    for f in provinces_geo["features"]:
+        pr = f["properties"]
+        lst = prov_services.get(pr["short"], [])
+        pr.update(count=len(lst), verified=sum(1 for s in lst if s.get("status") == "已验证"))
+
+    return {"world_geo": world_geo, "provinces_geo": provinces_geo,
+            "intl_services": intl, "prov_services": prov_services,
+            "china_national": china_national, "global_data": global_data}
+
+
 def build_stats(conn):
     q = lambda s: conn.execute(s).fetchone()[0]
     return {
@@ -92,13 +223,11 @@ print("Loading database data and map payload...")
 conn = sqlite3.connect(DB)
 data = build_data(conn)
 st = build_stats(conn)
+map_payload = build_map_payload(conn)
 conn.close()
 
-with open(PAYLOAD_PATH, 'r', encoding='utf-8') as f:
-    map_payload = json.load(f)
-
 payload_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
-map_payload_json = json.dumps(map_payload, ensure_ascii=False)
+map_payload_json = json.dumps(map_payload, ensure_ascii=False, separators=(",", ":"))
 
 html_content = f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -990,7 +1119,7 @@ function drillDownToChina() {{
   `;
 
   document.getElementById('m-side-title').textContent = "中国全国空间数据与省级分布";
-  document.getElementById('m-side-badge').textContent = "200 项收录";
+  document.getElementById('m-side-badge').textContent = `${{(MAP_DATA.world_geo.features.find(f=>f.properties.iso==='CN')||{{properties:{{count:0}}}}).properties.count}} 项收录`;
   document.getElementById('m-side-sub').textContent = "坚持一个中国原则，涵盖台湾省、香港、澳门及全国34个省级行政区空间开放数据。点击任意省区可查看属地化服务。";
 
   currentMapServices = MAP_DATA.china_national;
